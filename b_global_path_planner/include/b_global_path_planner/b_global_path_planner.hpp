@@ -1,42 +1,43 @@
 #ifndef GLOBAL_PATH_PLANNER_H
 #define GLOBAL_PATH_PLANNER_H
 
+#include <rclcpp/rclcpp.hpp>
 #include <geometry_msgs/msg/pose_stamped.hpp>
-#include <geometry_msgs/msg/point_stamped.h>
+#include <geometry_msgs/msg/point_stamped.hpp>
 #include <nav_msgs/msg/path.hpp>
 #include <nav_msgs/msg/occupancy_grid.hpp>
 #include <vector>
 #include <math.h>
 
-struct Node
+class Astar: public rclcpp::Node
 {
-    int    x = 0;
-    int    y = 0;
-    int    parent_x = -1;
-    int    parent_y = -1;
-    double f = 0.0;
-};
 
-struct Motion
-{
-    int dx;
-    int dy;
-    double cost;
-};
-
-class Astar
-{
 public:
     Astar();
     void process();
 
 private:
-    void map_callback(const nav_msgs::OccupancyGrid::ConstPtr& mag);  //マップの読み込み
+    struct Node
+    {
+        int    x = 0;
+        int    y = 0;
+        int    parent_x = - 1;
+        int    parent_y = -1;
+        double f = 0.0;
+    };
+
+    struct Motion
+    {
+        int dx;
+        int dy;
+        double cost;
+    };
+    void map_callback(const nav_msgs::msg::OccupancyGrid::SharedPtr mag);  //マップの読み込み
     void obs_expander();
     void obs_expand(const int index);
     void swap_node(const Node node, std::vector<Node>& list1,std::vector<Node>& list2);  //リスト間の移動
     void show_node_point(const Node node);  //ノードの表示
-    void show_path(nav_msgs::Path& current_path);  //パスの表示
+    void show_path(nav_msgs::msg::Path& current_path);  //パスの表示
     // void get_way_points(std::vector<std::vector<int>>& list);  //経由点の宣言
     void planning();  //経路計画
     void create_path(Node node);  //経路作成
@@ -60,7 +61,7 @@ private:
     Node select_min_f();  //一番f値が小さいものを選択
     Node get_neighbor(const Node node, const Motion motion);  //隣接ノードの取得
     Motion motion(const int dx,const int dy,const int cost);  //もーしょん
-    geometry_msgs::PoseStamped node_to_pose(const Node node);  //ノードから座標に変換
+    geometry_msgs::msg::PoseStamped node_to_pose(const Node node);  //ノードから座標に変換
 
     std::tuple<int, int> search_node(const Node node);  //どっちのリストに入っているのか検索
 
@@ -75,8 +76,8 @@ private:
     std::vector<Node> open_list_;  //opneリスト
     std::vector<Node> close_list_;  //closeリスト
 
-    bool   map_checker_ = false;  //正しくマップはとれたかな
-    bool   test_show_;  //デバッグしますか
+    bool map_checker_ = false;  //正しくマップはとれたかな
+    bool test_show_ = true;  //デバッグしますか
 
     //map製作用
     int height_;  //マップの幅だか高さだか
@@ -85,19 +86,19 @@ private:
     Node origin_;  //マップの原点
     std::vector<std::vector<int>> map_grid_;  //グリッドマップ
 
-    ros::Time begin_;
+    rclcpp::Clock begin_;
 
-    ros::NodeHandle nh_;
-    ros::NodeHandle private_nh_;
-    ros::Subscriber sub_map_;
-    ros::Publisher pub_path_;
-    ros::Publisher pub_node_point_;
-    ros::Publisher pub_current_path_;
-    ros::Publisher pub_new_map_;
+    // rclcpp::NodeHandle nh_;
+    // rclcpp::NodeHandle private_nh_;
+    rclcpp::Subscription<nav_msgs::msg::OccupancyGrid>::SharedPtr sub_map_;
+    rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr pub_path_;
+    rclcpp::Publisher<geometry_msgs::msg::PointStamped>::SharedPtr pub_node_point_;
+    rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr pub_current_path_;
+    rclcpp::Publisher<nav_msgs::msg::OccupancyGrid>::SharedPtr pub_new_map_;
 
-    nav_msgs::Path global_path_;
-    nav_msgs::OccupancyGrid map_;
-    nav_msgs::OccupancyGrid new_map_;
-    geometry_msgs::PointStamped current_node_;
+    nav_msgs::msg::Path global_path_;
+    nav_msgs::msg::OccupancyGrid map_;
+    nav_msgs::msg::OccupancyGrid new_map_;
+    geometry_msgs::msg::PointStamped current_node_;
 };
 #endif

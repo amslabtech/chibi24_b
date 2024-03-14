@@ -1,10 +1,11 @@
-#include "b_global_path_planner/b_global_path_planner.h"
+#include "b_global_path_planner/b_global_path_planner.hpp"
 
 int main(int argc, char* argv[])
 {
-    ros::init(argc, argv, "global_path_palnner");
-    Astar astar;
-    astar.process();
+    rclcpp::init(argc, argv);
+    auto astar_node = std::make_shared<Astar>();
+    astar_node->process();
+    rclcpp::shutdown();
 
     return 0;
 }
