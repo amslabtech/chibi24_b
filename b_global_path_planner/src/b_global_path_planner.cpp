@@ -311,7 +311,7 @@ int Astar::search_node_from_list(const Node node, std::vector<Node>& list)  //�
 
 void Astar::planning()  //経路計画
 {
-    begin_ = rclcpp::Clock::now();
+    begin_.now();
     const int total_phase = way_points_x_.size();
     for(int phase=0;phase<total_phase-1;phase++)
     {
