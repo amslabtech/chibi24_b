@@ -6,7 +6,7 @@ Astar::Astar(): rclcpp::Node("b_global_path_planner") {
     way_points_x_ = this->declare_parameter<std::vector<double>>("way_points_x", {0.0, 6.24, 11.92, 12.81, 13.23, 13.60, 10.75, 1.69, -7.27, -18.32, -20.14, -20.38, -20.50, -15.11, -6.95, 0.0});
     way_points_y_ = this->declare_parameter<std::vector<double>>("way_points_y", {0.0, -0.38, -0.57, 2.36, 6.46, 12.54, 13.80, 14.11, 14.49, 15.14, 11.18, 7.24, 1.85, 0.68, 0.34, 0.0});
     margin_ = this->declare_parameter<double>("margin", 0.25);
-    sleep_time_ = this->declare_parameter<double>("sleep_time", 0.0005);
+    sleep_time_ = this->declare_parameter<int>("sleep_time", 500000000);
 
     sub_map_ = this->create_subscription<nav_msgs::msg::OccupancyGrid>(
         "/map", rclcpp::QoS(1).reliable(), std::bind(&Astar::map_callback, this, std::placeholders::_1));
@@ -26,7 +26,7 @@ Astar::Astar(): rclcpp::Node("b_global_path_planner") {
 }
 
 
-void Astar::map_callback(const nav_msgs::msg::OccupancyGrid& msg) {
+void Astar::map_callback(const nav_msgs::msg::OccupancyGrid::SharedPtr msg) {
     map_ = *msg;
     origin_x_ = map_.info.origin.position.x;
     origin_y_ = map_.info.origin.position.y;
@@ -108,7 +108,8 @@ void Astar::show_node_point(const Node node) {
         current_node_.point.x = node.x * resolution_ + origin_x_;
         current_node_.point.y = node.y * resolution_ + origin_y_;
         pub_node_point_->publish(current_node_);
-        rclcpp::Duration(sleep_time_).sleep();
+        // node.cppで時間制御
+        // rclcpp::Duration::from_nanoseconds(sleep_time_).sleep();
     }
 }
 
@@ -116,7 +117,8 @@ void Astar::show_path(nav_msgs::msg::Path& current_path) {
     if (test_show_) {
         current_path.header.frame_id = "map";
         pub_current_path_->publish(current_path);
-        rclcpp::Duration(sleep_time_).sleep();
+        // node.cpp で時間制御
+        // rclcpp::Duration::from_nanoseconds(sleep_time_).sleep();
     }
 }
 
@@ -309,7 +311,7 @@ int Astar::search_node_from_list(const Node node, std::vector<Node>& list)  //�
 
 void Astar::planning()  //経路計画
 {
-    begin_ = rclcpp::Clock.now();
+    begin_ = rclcpp::Clock::now();
     const int total_phase = way_points_x_.size();
     for(int phase=0;phase<total_phase-1;phase++)
     {
@@ -346,21 +348,15 @@ void Astar::planning()  //経路計画
 
 void Astar::process()  //メイン関数で実行する関数
 {
-    rclcpp::Node::SharedPtr node = std::make_shared<rclcpp::Node>("astar_node");
-    rclcpp::Rate loop_rate(hz_);
 
-    while (rclcpp::ok())
+    if (!map_checker_)
     {
-        if (!map_checker_)
-        {
-            // ROS_INFO("NOW LOADING...");
-        }
-        else
-        {
-            obs_expander();
-            planning();
-        }
-        rclcpp::spin_some(node);
-        loop_rate.sleep();
+        // ROS_INFO("NOW LOADING...");
     }
+    else
+    {
+        obs_expander();
+        planning();
+    }
+
 }

@@ -15,7 +15,7 @@ class Astar: public rclcpp::Node
 public:
     Astar();
     void process();
-
+    int hz_;  //周波数
 private:
     struct Node
     {
@@ -53,7 +53,7 @@ private:
     bool check_parent(const int index, const Node node);
 
     double make_heuristic(const Node node);  //ヒューリスティック関数の取得
-    double sleep_time_;
+    int sleep_time_;
     double margin_;
     int check_list(const Node target_node, std::vector<Node>& set);  //リストの中を検索
     int search_node_from_list(const Node node, std::vector<Node>& list);  //リストの中を検索
@@ -70,7 +70,7 @@ private:
     std::vector<double> way_points_x_;  //経由点
     std::vector<double> way_points_y_;  //経由点
 
-    int hz_;  //周波数
+
     Node start_node_;  //開始位置
     Node goal_node_;  //目標位置
     std::vector<Node> open_list_;  //opneリスト
