@@ -1,0 +1,27 @@
+[35m[1mConsolidate compiler generated dependencies of target b_obstacle_detector_node[0m
+[ 33%] [32mBuilding CXX object CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o[0m
+[ 66%] [32mBuilding CXX object CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector_node.cpp.o[0m
+[100%] [32m[1mLinking CXX executable b_obstacle_detector_node[0m
+[100%] Built target b_obstacle_detector_node
+-- Install configuration: "RelWithDebInfo"
+-- Execute custom install script
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector//launch/b_obstacle_detector.launch.xml
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/include/b_obstacle_detector/b_obstacle_detector.hpp
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/lib/b_obstacle_detector/b_obstacle_detector_node
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/ament_index/resource_index/package_run_dependencies/b_obstacle_detector
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/ament_index/resource_index/parent_prefix_path/b_obstacle_detector
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/environment/ament_prefix_path.sh
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/environment/ament_prefix_path.dsv
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/environment/path.sh
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/environment/path.dsv
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/local_setup.bash
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/local_setup.sh
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/local_setup.zsh
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/local_setup.dsv
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/package.dsv
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/ament_index/resource_index/packages/b_obstacle_detector
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/cmake/b_obstacle_detectorConfig.cmake
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/cmake/b_obstacle_detectorConfig-version.cmake
+-- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/package.xml

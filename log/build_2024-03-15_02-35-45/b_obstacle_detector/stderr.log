@@ -1,0 +1,7 @@
+[01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:[m[K In constructor ‘[01m[KObstacleDetector::ObstacleDetector(const string&, const string&, const rclcpp::NodeOptions&)[m[K’:
+[01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:7:36:[m[K [01;31m[Kerror: [m[Kunable to find numeric literal operator ‘[01m[Koperator""s[m[K’
+    7 |   timer_ = this->create_wall_timer([01;31m[K0.5s[m[K, std::bind(&ObstacleDetector::timer_callback, this));
+      |                                    [01;31m[K^~~~[m[K
+gmake[2]: *** [CMakeFiles/b_obstacle_detector_node.dir/build.make:76: CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/b_obstacle_detector_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

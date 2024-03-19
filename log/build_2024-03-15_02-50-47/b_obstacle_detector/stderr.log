@@ -1,0 +1,7 @@
+[01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:[m[K In member function ‘[01m[Kvoid ObstacleDetector::scan_obstacle()[m[K’:
+[01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:75:46:[m[K [01;31m[Kerror: [m[K‘[01m[Kobs_pose[m[K’ was not declared in this scope
+   75 |         obstacle_pose_array_.poses.push_back([01;31m[Kobs_pose[m[K);
+      |                                              [01;31m[K^~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/b_obstacle_detector_node.dir/build.make:76: CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/b_obstacle_detector_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

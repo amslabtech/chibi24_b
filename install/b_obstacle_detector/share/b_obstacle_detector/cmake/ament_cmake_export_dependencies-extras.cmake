@@ -1,0 +1,1 @@
+/home/user/ws/src/chibi24_b/build/b_obstacle_detector/ament_cmake_export_dependencies/ament_cmake_export_dependencies-extras.cmake

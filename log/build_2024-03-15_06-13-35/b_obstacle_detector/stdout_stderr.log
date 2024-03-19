@@ -1,0 +1,39 @@
+[35m[1mConsolidate compiler generated dependencies of target b_obstacle_detector_node[0m
+[ 33%] [32mBuilding CXX object CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o[0m
+[01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:[m[K In constructor ‘[01m[KObstacleDetector::ObstacleDetector()[m[K’:
+[01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:11:54:[m[K [01;31m[Kerror: [m[Kuse of ‘[01m[Kthis[m[K’ in a constant expression
+   11 |   ignore_angle_range_list_ = this->declare_parameter<[01;31m[Kignore_angle_range_list_[m[K>("ignore_angle_range_list",{(3.0*M_PI/16.0), (5.0*M_PI/16.0), (11.0*M_PI/16.0)});
+      |                                                      [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:11:79:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KObstacleDetector::declare_parameter<((ObstacleDetector*)this)->ObstacleDetector::ignore_angle_range_list_>(const char [24], <brace-enclosed initializer list>)[m[K’
+   11 |   ignore_angle_range_list_ = [01;31m[Kthis->declare_parameter<ignore_angle_range_list_>("ignore_angle_range_list",{(3.0*M_PI/16.0), (5.0*M_PI/16.0), (11.0*M_PI/16.0)})[m[K;
+      |                              [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:1321[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+                 from [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/include/b_obstacle_detector/b_obstacle_detector.hpp:5[m[K,
+                 from [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:1[m[K:
+[01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:195:1:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class ParameterT> auto rclcpp::Node::declare_parameter(const string&, const ParameterT&, const ParameterDescriptor&, bool)[m[K’
+  195 | [01;36m[KNode[m[K::declare_parameter(
+      | [01;36m[K^~~~[m[K
+[01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:195:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:11:79:[m[K [01;31m[Kerror: [m[Ktype/value mismatch at argument 1 in template parameter list for ‘[01m[Ktemplate<class ParameterT> auto rclcpp::Node::declare_parameter(const string&, const ParameterT&, const ParameterDescriptor&, bool)[m[K’
+   11 |   ignore_angle_range_list_ = [01;31m[Kthis->declare_parameter<ignore_angle_range_list_>("ignore_angle_range_list",{(3.0*M_PI/16.0), (5.0*M_PI/16.0), (11.0*M_PI/16.0)})[m[K;
+      |                              [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:11:79:[m[K [01;36m[Knote: [m[K  expected a type, got ‘[01m[K((ObstacleDetector*)this)->ObstacleDetector::ignore_angle_range_list_[m[K’
+In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+                 from [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/include/b_obstacle_detector/b_obstacle_detector.hpp:5[m[K,
+                 from [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:1[m[K:
+[01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:434:3:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class ParameterT> auto rclcpp::Node::declare_parameter(const string&, const ParameterDescriptor&, bool)[m[K’
+  434 |   [01;36m[Kdeclare_parameter[m[K(
+      |   [01;36m[K^~~~~~~~~~~~~~~~~[m[K
+[01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:434:3:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:11:79:[m[K [01;31m[Kerror: [m[Ktype/value mismatch at argument 1 in template parameter list for ‘[01m[Ktemplate<class ParameterT> auto rclcpp::Node::declare_parameter(const string&, const ParameterDescriptor&, bool)[m[K’
+   11 |   ignore_angle_range_list_ = [01;31m[Kthis->declare_parameter<ignore_angle_range_list_>("ignore_angle_range_list",{(3.0*M_PI/16.0), (5.0*M_PI/16.0), (11.0*M_PI/16.0)})[m[K;
+      |                              [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:11:79:[m[K [01;36m[Knote: [m[K  expected a type, got ‘[01m[K((ObstacleDetector*)this)->ObstacleDetector::ignore_angle_range_list_[m[K’
+gmake[2]: *** [CMakeFiles/b_obstacle_detector_node.dir/build.make:76: CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/b_obstacle_detector_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

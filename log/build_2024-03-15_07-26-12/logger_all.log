@@ -1,0 +1,138 @@
+[2.453s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install', '--cmake-args', '-DCMAKE_BUILD_TYPE=RelWithDebInfo', '--event-handlers', 'console_direct+', '--packages-select', 'b_obstacle_detector']
+[2.453s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=8, event_handlers=['console_direct+'], ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=['b_obstacle_detector'], packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, cmake_args=['-DCMAKE_BUILD_TYPE=RelWithDebInfo'], cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x7ffb07b57610>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7ffb07e3fdf0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7ffb07e3fdf0>>, mixin_verb=('build',))
+[2.575s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[2.575s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[2.575s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[2.575s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[2.575s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[2.575s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[2.576s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/user/ws/src/chibi24_b'
+[2.576s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[2.576s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[2.576s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[2.576s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[2.576s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[2.576s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[2.576s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[2.577s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[2.577s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[2.602s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[2.602s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[2.602s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[2.602s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[2.602s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[2.603s] Level 1:colcon.colcon_core.package_identification:_identify(b_obstacle_detector) by extensions ['ignore', 'ignore_ament_install']
+[2.603s] Level 1:colcon.colcon_core.package_identification:_identify(b_obstacle_detector) by extension 'ignore'
+[2.603s] Level 1:colcon.colcon_core.package_identification:_identify(b_obstacle_detector) by extension 'ignore_ament_install'
+[2.603s] Level 1:colcon.colcon_core.package_identification:_identify(b_obstacle_detector) by extensions ['colcon_pkg']
+[2.603s] Level 1:colcon.colcon_core.package_identification:_identify(b_obstacle_detector) by extension 'colcon_pkg'
+[2.603s] Level 1:colcon.colcon_core.package_identification:_identify(b_obstacle_detector) by extensions ['colcon_meta']
+[2.603s] Level 1:colcon.colcon_core.package_identification:_identify(b_obstacle_detector) by extension 'colcon_meta'
+[2.603s] Level 1:colcon.colcon_core.package_identification:_identify(b_obstacle_detector) by extensions ['ros']
+[2.603s] Level 1:colcon.colcon_core.package_identification:_identify(b_obstacle_detector) by extension 'ros'
+[2.611s] DEBUG:colcon.colcon_core.package_identification:Package 'b_obstacle_detector' with type 'ros.ament_cmake' and name 'b_obstacle_detector'
+[2.611s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[2.612s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[2.612s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[2.612s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[2.612s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[2.612s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[2.613s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[2.613s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[2.613s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[2.613s] Level 1:colcon.colcon_core.package_identification:_identify(map) by extensions ['ignore', 'ignore_ament_install']
+[2.614s] Level 1:colcon.colcon_core.package_identification:_identify(map) by extension 'ignore'
+[2.614s] Level 1:colcon.colcon_core.package_identification:_identify(map) by extension 'ignore_ament_install'
+[2.614s] Level 1:colcon.colcon_core.package_identification:_identify(map) by extensions ['colcon_pkg']
+[2.614s] Level 1:colcon.colcon_core.package_identification:_identify(map) by extension 'colcon_pkg'
+[2.614s] Level 1:colcon.colcon_core.package_identification:_identify(map) by extensions ['colcon_meta']
+[2.614s] Level 1:colcon.colcon_core.package_identification:_identify(map) by extension 'colcon_meta'
+[2.614s] Level 1:colcon.colcon_core.package_identification:_identify(map) by extensions ['ros']
+[2.615s] Level 1:colcon.colcon_core.package_identification:_identify(map) by extension 'ros'
+[2.615s] Level 1:colcon.colcon_core.package_identification:_identify(map) by extensions ['cmake', 'python']
+[2.615s] Level 1:colcon.colcon_core.package_identification:_identify(map) by extension 'cmake'
+[2.615s] Level 1:colcon.colcon_core.package_identification:_identify(map) by extension 'python'
+[2.615s] Level 1:colcon.colcon_core.package_identification:_identify(map) by extensions ['python_setup_py']
+[2.615s] Level 1:colcon.colcon_core.package_identification:_identify(map) by extension 'python_setup_py'
+[2.615s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[2.615s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[2.615s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[2.615s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[2.615s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[2.726s] Level 5:colcon.colcon_core.verb:set package 'b_obstacle_detector' build argument 'cmake_args' from command line to '['-DCMAKE_BUILD_TYPE=RelWithDebInfo']'
+[2.726s] Level 5:colcon.colcon_core.verb:set package 'b_obstacle_detector' build argument 'cmake_target' from command line to 'None'
+[2.727s] Level 5:colcon.colcon_core.verb:set package 'b_obstacle_detector' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.727s] Level 5:colcon.colcon_core.verb:set package 'b_obstacle_detector' build argument 'cmake_clean_cache' from command line to 'False'
+[2.727s] Level 5:colcon.colcon_core.verb:set package 'b_obstacle_detector' build argument 'cmake_clean_first' from command line to 'False'
+[2.727s] Level 5:colcon.colcon_core.verb:set package 'b_obstacle_detector' build argument 'cmake_force_configure' from command line to 'False'
+[2.727s] Level 5:colcon.colcon_core.verb:set package 'b_obstacle_detector' build argument 'ament_cmake_args' from command line to 'None'
+[2.727s] Level 5:colcon.colcon_core.verb:set package 'b_obstacle_detector' build argument 'catkin_cmake_args' from command line to 'None'
+[2.727s] Level 5:colcon.colcon_core.verb:set package 'b_obstacle_detector' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.728s] DEBUG:colcon.colcon_core.verb:Building package 'b_obstacle_detector' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/user/ws/src/chibi24_b/build/b_obstacle_detector', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': ['-DCMAKE_BUILD_TYPE=RelWithDebInfo'], 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/user/ws/src/chibi24_b/install/b_obstacle_detector', 'merge_install': False, 'path': '/home/user/ws/src/chibi24_b/b_obstacle_detector', 'symlink_install': True, 'test_result_base': None}
+[2.759s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[2.798s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[2.806s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/user/ws/src/chibi24_b/b_obstacle_detector' with build type 'ament_cmake'
+[2.807s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/user/ws/src/chibi24_b/b_obstacle_detector'
+[2.876s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[2.877s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.877s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.061s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/user/ws/src/chibi24_b/build/b_obstacle_detector': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble /usr/bin/cmake --build /home/user/ws/src/chibi24_b/build/b_obstacle_detector -- -j8 -l8
+[47.920s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/user/ws/src/chibi24_b/build/b_obstacle_detector' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble /usr/bin/cmake --build /home/user/ws/src/chibi24_b/build/b_obstacle_detector -- -j8 -l8
+[48.051s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/user/ws/src/chibi24_b/build/b_obstacle_detector': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble /usr/bin/cmake --install /home/user/ws/src/chibi24_b/build/b_obstacle_detector
+[48.127s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(b_obstacle_detector)
+[48.128s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/user/ws/src/chibi24_b/build/b_obstacle_detector' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble /usr/bin/cmake --install /home/user/ws/src/chibi24_b/build/b_obstacle_detector
+[48.168s] Level 1:colcon.colcon_core.environment:checking '/home/user/ws/src/chibi24_b/install/b_obstacle_detector' for CMake module files
+[48.169s] Level 1:colcon.colcon_core.environment:checking '/home/user/ws/src/chibi24_b/install/b_obstacle_detector' for CMake config files
+[48.169s] Level 1:colcon.colcon_core.shell:create_environment_hook('b_obstacle_detector', 'cmake_prefix_path')
+[48.197s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/hook/cmake_prefix_path.ps1'
+[48.198s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/hook/cmake_prefix_path.dsv'
+[48.199s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/hook/cmake_prefix_path.sh'
+[48.202s] Level 1:colcon.colcon_core.environment:checking '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/lib'
+[48.202s] Level 1:colcon.colcon_core.environment:checking '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/bin'
+[48.202s] Level 1:colcon.colcon_core.environment:checking '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/lib/pkgconfig/b_obstacle_detector.pc'
+[48.206s] Level 1:colcon.colcon_core.environment:checking '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/lib/python3.10/site-packages'
+[48.207s] Level 1:colcon.colcon_core.environment:checking '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/bin'
+[48.228s] INFO:colcon.colcon_core.shell:Creating package script '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/package.ps1'
+[48.230s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/package.dsv'
+[48.230s] INFO:colcon.colcon_core.shell:Creating package script '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/package.sh'
+[48.232s] INFO:colcon.colcon_core.shell:Creating package script '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/package.bash'
+[48.234s] INFO:colcon.colcon_core.shell:Creating package script '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/package.zsh'
+[48.235s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/colcon-core/packages/b_obstacle_detector)
+[48.310s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(b_obstacle_detector)
+[48.327s] Level 1:colcon.colcon_core.environment:checking '/home/user/ws/src/chibi24_b/install/b_obstacle_detector' for CMake module files
+[48.328s] Level 1:colcon.colcon_core.environment:checking '/home/user/ws/src/chibi24_b/install/b_obstacle_detector' for CMake config files
+[48.328s] Level 1:colcon.colcon_core.shell:create_environment_hook('b_obstacle_detector', 'cmake_prefix_path')
+[48.344s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/hook/cmake_prefix_path.ps1'
+[48.344s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/hook/cmake_prefix_path.dsv'
+[48.345s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/hook/cmake_prefix_path.sh'
+[48.346s] Level 1:colcon.colcon_core.environment:checking '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/lib'
+[48.346s] Level 1:colcon.colcon_core.environment:checking '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/bin'
+[48.346s] Level 1:colcon.colcon_core.environment:checking '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/lib/pkgconfig/b_obstacle_detector.pc'
+[48.346s] Level 1:colcon.colcon_core.environment:checking '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/lib/python3.10/site-packages'
+[48.346s] Level 1:colcon.colcon_core.environment:checking '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/bin'
+[48.363s] INFO:colcon.colcon_core.shell:Creating package script '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/package.ps1'
+[48.364s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/package.dsv'
+[48.365s] INFO:colcon.colcon_core.shell:Creating package script '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/package.sh'
+[48.365s] INFO:colcon.colcon_core.shell:Creating package script '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/package.bash'
+[48.366s] INFO:colcon.colcon_core.shell:Creating package script '/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/package.zsh'
+[48.367s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/colcon-core/packages/b_obstacle_detector)
+[48.368s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[48.368s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[48.368s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[48.368s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[48.432s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[48.432s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[48.432s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[48.432s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[48.439s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.Spawn.ExecFailed: /usr/bin/dbus-launch terminated abnormally without any error message
+[48.440s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[48.470s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/user/ws/src/chibi24_b/install/local_setup.ps1'
+[48.472s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/user/ws/src/chibi24_b/install/_local_setup_util_ps1.py'
+[48.476s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/user/ws/src/chibi24_b/install/setup.ps1'
+[48.510s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/user/ws/src/chibi24_b/install/local_setup.sh'
+[48.512s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/user/ws/src/chibi24_b/install/_local_setup_util_sh.py'
+[48.513s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/user/ws/src/chibi24_b/install/setup.sh'
+[48.548s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/user/ws/src/chibi24_b/install/local_setup.bash'
+[48.550s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/user/ws/src/chibi24_b/install/setup.bash'
+[48.573s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/user/ws/src/chibi24_b/install/local_setup.zsh'
+[48.575s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/user/ws/src/chibi24_b/install/setup.zsh'

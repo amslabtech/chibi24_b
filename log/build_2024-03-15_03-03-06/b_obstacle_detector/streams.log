@@ -1,0 +1,19 @@
+[0.099s] Invoking command in '/home/user/ws/src/chibi24_b/build/b_obstacle_detector': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble /usr/bin/cmake --build /home/user/ws/src/chibi24_b/build/b_obstacle_detector -- -j8 -l8
+[0.234s] [ 33%] [32mBuilding CXX object CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o[0m
+[0.235s] [ 66%] [32mBuilding CXX object CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector_node.cpp.o[0m
+[0.598s] In file included from [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:1[m[K:
+[0.598s] [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/include/b_obstacle_detector/b_obstacle_detector.hpp:11:10:[m[K [01;31m[Kfatal error: [m[Kgeometry_msgs/msg/Pose.h: No such file or directory
+[0.598s]    11 | #include [01;31m[K<geometry_msgs/msg/Pose.h>[m[K
+[0.598s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.598s] compilation terminated.
+[0.600s] In file included from [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector_node.cpp:1[m[K:
+[0.601s] [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/include/b_obstacle_detector/b_obstacle_detector.hpp:11:10:[m[K [01;31m[Kfatal error: [m[Kgeometry_msgs/msg/Pose.h: No such file or directory
+[0.601s]    11 | #include [01;31m[K<geometry_msgs/msg/Pose.h>[m[K
+[0.601s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.602s] compilation terminated.
+[0.602s] gmake[2]: *** [CMakeFiles/b_obstacle_detector_node.dir/build.make:76: CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o] Error 1
+[0.602s] gmake[2]: *** Waiting for unfinished jobs....
+[0.605s] gmake[2]: *** [CMakeFiles/b_obstacle_detector_node.dir/build.make:90: CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector_node.cpp.o] Error 1
+[0.605s] gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/b_obstacle_detector_node.dir/all] Error 2
+[0.605s] gmake: *** [Makefile:146: all] Error 2
+[0.609s] Invoked command in '/home/user/ws/src/chibi24_b/build/b_obstacle_detector' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble /usr/bin/cmake --build /home/user/ws/src/chibi24_b/build/b_obstacle_detector -- -j8 -l8

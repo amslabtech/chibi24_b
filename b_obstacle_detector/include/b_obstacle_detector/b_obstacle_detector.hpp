@@ -8,22 +8,24 @@
 #include <optional>
 #include <sensor_msgs/msg/laser_scan.hpp>
 #include <geometry_msgs/msg/pose_array.hpp>
+#include <geometry_msgs/msg/pose.hpp>
+#include <math.h>
 
-//using namespace std::chrono_literals;
+using namespace std::chrono_literals;
 
 class ObstacleDetector : public rclcpp::Node
 {
   public:
-  ObstacleDetector(const std::string& b_obstacle_detector_topic, const std::string& b_obstacle_detector, const rclcpp::NodeOptions & node_options); 
-  
+  ObstacleDetector(); 
+  void process();
 
+  private:
   //コールバック関数
   void scan_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg); 
   void timer_callback();
 
   //関数
-  void set_obstacle_detecter();
-  void process();
+  //void set_obstacle_detecter();
   void scan_obstacle();
   bool is_ignore_scan(double angle);
 
@@ -33,6 +35,7 @@ class ObstacleDetector : public rclcpp::Node
   int laser_step_;
   double ignore_dist_;
 
+  std::string robot_frame_;
   std::vector<double> ignore_angle_range_list_;
   bool flag_laser_scan_ = false;
 

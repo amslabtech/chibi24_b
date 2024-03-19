@@ -1,0 +1,242 @@
+[0.000000] (-) TimerEvent: {}
+[0.005704] (b_obstacle_detector) JobQueued: {'identifier': 'b_obstacle_detector', 'dependencies': OrderedDict()}
+[0.007444] (b_obstacle_detector) JobStarted: {'identifier': 'b_obstacle_detector'}
+[0.099957] (-) TimerEvent: {}
+[0.142036] (b_obstacle_detector) JobProgress: {'identifier': 'b_obstacle_detector', 'progress': 'cmake'}
+[0.145610] (b_obstacle_detector) JobProgress: {'identifier': 'b_obstacle_detector', 'progress': 'build'}
+[0.146802] (b_obstacle_detector) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/user/ws/src/chibi24_b/build/b_obstacle_detector', '--', '-j8', '-l8'], 'cwd': '/home/user/ws/src/chibi24_b/build/b_obstacle_detector', 'env': OrderedDict([('HOSTNAME', 'docker-desktop'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/user/ws/install/roomba_500driver_meiji/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/user'), ('OLDPWD', '/home/user/ws/src'), ('ROS_PYTHON_VERSION', '3'), ('_colcon_cd_root', '/home/user/ws'), ('COLCON_PREFIX_PATH', '/home/user/ws/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/home/user/ws/install/turtlesim_controller_py:/home/user/ws/install/turtlesim_controller:/home/user/ws/install/third_challenge_suzuki:/home/user/ws/install/third_challenge:/home/user/ws/install/second_challenge_suzuki:/home/user/ws/install/roomba_teleop_meiji:/home/user/ws/install/roomba_description:/home/user/ws/install/first_challenge_suzuki:/home/user/ws/install/roomba_500driver_meiji:/home/user/ws/install/b_obstacle_detector:/home/user/ws/install/b_local_map_creator:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('PWD', '/home/user/ws/src/chibi24_b/build/b_obstacle_detector'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/home/user/ws/build/turtlesim_controller_py:/home/user/ws/install/turtlesim_controller_py/lib/python3.10/site-packages:/home/user/ws/install/roomba_500driver_meiji/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/user/ws/install/turtlesim_controller:/home/user/ws/install/third_challenge_suzuki:/home/user/ws/install/third_challenge:/home/user/ws/install/second_challenge_suzuki:/home/user/ws/install/roomba_teleop_meiji:/home/user/ws/install/roomba_description:/home/user/ws/install/first_challenge_suzuki:/home/user/ws/install/roomba_500driver_meiji:/home/user/ws/install/b_obstacle_detector:/home/user/ws/install/b_local_map_creator:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble')]), 'shell': False}
+[0.200123] (-) TimerEvent: {}
+[0.300730] (-) TimerEvent: {}
+[0.401290] (-) TimerEvent: {}
+[0.501934] (-) TimerEvent: {}
+[0.517040] (b_obstacle_detector) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target b_obstacle_detector_node\x1b[0m\n'}
+[0.571124] (b_obstacle_detector) StdoutLine: {'line': b'[ 66%] \x1b[32mBuilding CXX object CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector_node.cpp.o\x1b[0m\n'}
+[0.571369] (b_obstacle_detector) StdoutLine: {'line': b'[ 66%] \x1b[32mBuilding CXX object CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o\x1b[0m\n'}
+[0.602089] (-) TimerEvent: {}
+[0.702501] (-) TimerEvent: {}
+[0.802941] (-) TimerEvent: {}
+[0.903497] (-) TimerEvent: {}
+[1.004069] (-) TimerEvent: {}
+[1.104707] (-) TimerEvent: {}
+[1.205344] (-) TimerEvent: {}
+[1.305878] (-) TimerEvent: {}
+[1.406378] (-) TimerEvent: {}
+[1.506823] (-) TimerEvent: {}
+[1.607412] (-) TimerEvent: {}
+[1.708022] (-) TimerEvent: {}
+[1.808717] (-) TimerEvent: {}
+[1.909371] (-) TimerEvent: {}
+[2.010275] (-) TimerEvent: {}
+[2.111235] (-) TimerEvent: {}
+[2.211785] (-) TimerEvent: {}
+[2.312282] (-) TimerEvent: {}
+[2.412754] (-) TimerEvent: {}
+[2.513303] (-) TimerEvent: {}
+[2.613925] (-) TimerEvent: {}
+[2.714471] (-) TimerEvent: {}
+[2.814983] (-) TimerEvent: {}
+[2.915504] (-) TimerEvent: {}
+[3.016134] (-) TimerEvent: {}
+[3.116722] (-) TimerEvent: {}
+[3.217135] (-) TimerEvent: {}
+[3.317612] (-) TimerEvent: {}
+[3.418078] (-) TimerEvent: {}
+[3.518576] (-) TimerEvent: {}
+[3.619107] (-) TimerEvent: {}
+[3.719541] (-) TimerEvent: {}
+[3.820053] (-) TimerEvent: {}
+[3.920546] (-) TimerEvent: {}
+[4.021116] (-) TimerEvent: {}
+[4.121680] (-) TimerEvent: {}
+[4.222198] (-) TimerEvent: {}
+[4.322817] (-) TimerEvent: {}
+[4.423505] (-) TimerEvent: {}
+[4.524141] (-) TimerEvent: {}
+[4.624822] (-) TimerEvent: {}
+[4.725437] (-) TimerEvent: {}
+[4.826143] (-) TimerEvent: {}
+[4.926626] (-) TimerEvent: {}
+[5.027128] (-) TimerEvent: {}
+[5.127862] (-) TimerEvent: {}
+[5.228503] (-) TimerEvent: {}
+[5.329305] (-) TimerEvent: {}
+[5.430001] (-) TimerEvent: {}
+[5.530625] (-) TimerEvent: {}
+[5.631358] (-) TimerEvent: {}
+[5.731938] (-) TimerEvent: {}
+[5.832412] (-) TimerEvent: {}
+[5.932958] (-) TimerEvent: {}
+[6.033447] (-) TimerEvent: {}
+[6.133885] (-) TimerEvent: {}
+[6.234381] (-) TimerEvent: {}
+[6.334844] (-) TimerEvent: {}
+[6.435416] (-) TimerEvent: {}
+[6.536052] (-) TimerEvent: {}
+[6.636690] (-) TimerEvent: {}
+[6.737193] (-) TimerEvent: {}
+[6.837647] (-) TimerEvent: {}
+[6.938130] (-) TimerEvent: {}
+[7.038681] (-) TimerEvent: {}
+[7.139359] (-) TimerEvent: {}
+[7.239958] (-) TimerEvent: {}
+[7.340512] (-) TimerEvent: {}
+[7.441134] (-) TimerEvent: {}
+[7.541611] (-) TimerEvent: {}
+[7.642083] (-) TimerEvent: {}
+[7.742598] (-) TimerEvent: {}
+[7.843151] (-) TimerEvent: {}
+[7.943732] (-) TimerEvent: {}
+[8.044511] (-) TimerEvent: {}
+[8.145045] (-) TimerEvent: {}
+[8.245553] (-) TimerEvent: {}
+[8.346144] (-) TimerEvent: {}
+[8.446706] (-) TimerEvent: {}
+[8.547272] (-) TimerEvent: {}
+[8.647815] (-) TimerEvent: {}
+[8.748388] (-) TimerEvent: {}
+[8.849111] (-) TimerEvent: {}
+[8.949693] (-) TimerEvent: {}
+[9.050267] (-) TimerEvent: {}
+[9.150936] (-) TimerEvent: {}
+[9.251449] (-) TimerEvent: {}
+[9.351921] (-) TimerEvent: {}
+[9.452401] (-) TimerEvent: {}
+[9.552932] (-) TimerEvent: {}
+[9.653425] (-) TimerEvent: {}
+[9.753891] (-) TimerEvent: {}
+[9.854359] (-) TimerEvent: {}
+[9.954838] (-) TimerEvent: {}
+[10.055348] (-) TimerEvent: {}
+[10.155793] (-) TimerEvent: {}
+[10.256239] (-) TimerEvent: {}
+[10.356758] (-) TimerEvent: {}
+[10.457207] (-) TimerEvent: {}
+[10.557709] (-) TimerEvent: {}
+[10.658180] (-) TimerEvent: {}
+[10.758678] (-) TimerEvent: {}
+[10.859314] (-) TimerEvent: {}
+[10.959864] (-) TimerEvent: {}
+[11.060387] (-) TimerEvent: {}
+[11.160885] (-) TimerEvent: {}
+[11.261632] (-) TimerEvent: {}
+[11.362297] (-) TimerEvent: {}
+[11.462952] (-) TimerEvent: {}
+[11.563636] (-) TimerEvent: {}
+[11.664608] (-) TimerEvent: {}
+[11.765447] (-) TimerEvent: {}
+[11.865996] (-) TimerEvent: {}
+[11.966690] (-) TimerEvent: {}
+[12.067117] (-) TimerEvent: {}
+[12.167558] (-) TimerEvent: {}
+[12.268016] (-) TimerEvent: {}
+[12.368482] (-) TimerEvent: {}
+[12.468969] (-) TimerEvent: {}
+[12.569428] (-) TimerEvent: {}
+[12.669944] (-) TimerEvent: {}
+[12.770564] (-) TimerEvent: {}
+[12.871066] (-) TimerEvent: {}
+[12.971548] (-) TimerEvent: {}
+[13.072090] (-) TimerEvent: {}
+[13.101228] (b_obstacle_detector) StderrLine: {'line': b'\x1b[01m\x1b[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:\x1b[m\x1b[K In constructor \xe2\x80\x98\x1b[01m\x1b[KObstacleDetector::ObstacleDetector()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[13.105766] (b_obstacle_detector) StderrLine: {'line': b'\x1b[01m\x1b[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:11:97:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kpi\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[13.106225] (b_obstacle_detector) StderrLine: {'line': b'   11 |  = this->declare_parameter<double>("ignore_angle_range_list",[rad(3.0*\x1b[01;31m\x1b[Kpi\x1b[m\x1b[K/16.0), rad(5.0*pi/16.0), rad(11.0*pi/16.0)]);\n'}
+[13.106578] (b_obstacle_detector) StderrLine: {'line': b'      |                                                                       \x1b[01;31m\x1b[K^~\x1b[m\x1b[K\n'}
+[13.106724] (b_obstacle_detector) StderrLine: {'line': b'\n'}
+[13.106874] (b_obstacle_detector) StderrLine: {'line': b'\x1b[01m\x1b[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:11:122:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kalready captured \xe2\x80\x98\x1b[01m\x1b[Krad\x1b[m\x1b[K\xe2\x80\x99 in lambda expression\n'}
+[13.107474] (b_obstacle_detector) StderrLine: {'line': b'   11 | r<double>("ignore_angle_range_list",[rad(3.0*pi/16.0), rad(5.0*pi/16.0\x1b[01;35m\x1b[K)\x1b[m\x1b[K, rad(11.0*pi/16.0)]);\n'}
+[13.108263] (b_obstacle_detector) StderrLine: {'line': b'      |                                                                       \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[13.108414] (b_obstacle_detector) StderrLine: {'line': b'\n'}
+[13.108614] (b_obstacle_detector) StderrLine: {'line': b'\x1b[01m\x1b[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:11:141:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kalready captured \xe2\x80\x98\x1b[01m\x1b[Krad\x1b[m\x1b[K\xe2\x80\x99 in lambda expression\n'}
+[13.108761] (b_obstacle_detector) StderrLine: {'line': b'   11 | gnore_angle_range_list",[rad(3.0*pi/16.0), rad(5.0*pi/16.0), rad(11.0*pi/16.0\x1b[01;35m\x1b[K)\x1b[m\x1b[K]);\n'}
+[13.108926] (b_obstacle_detector) StderrLine: {'line': b'      |                                                                              \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[13.109067] (b_obstacle_detector) StderrLine: {'line': b'\n'}
+[13.109237] (b_obstacle_detector) StderrLine: {'line': b'\x1b[01m\x1b[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:\x1b[m\x1b[K In lambda function:\n'}
+[13.109467] (b_obstacle_detector) StderrLine: {'line': b'\x1b[01m\x1b[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:11:143:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected \xe2\x80\x98\x1b[01m\x1b[K{\x1b[m\x1b[K\xe2\x80\x99 before \xe2\x80\x98\x1b[01m\x1b[K)\x1b[m\x1b[K\xe2\x80\x99 token\n'}
+[13.109698] (b_obstacle_detector) StderrLine: {'line': b'   11 | gnore_angle_range_list",[rad(3.0*pi/16.0), rad(5.0*pi/16.0), rad(11.0*pi/16.0)]\x1b[01;31m\x1b[K)\x1b[m\x1b[K;\n'}
+[13.109911] (b_obstacle_detector) StderrLine: {'line': b'      |                                                                                \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[13.110137] (b_obstacle_detector) StderrLine: {'line': b'\n'}
+[13.110352] (b_obstacle_detector) StderrLine: {'line': b'\x1b[01m\x1b[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:\x1b[m\x1b[K In constructor \xe2\x80\x98\x1b[01m\x1b[KObstacleDetector::ObstacleDetector()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[13.110665] (b_obstacle_detector) StderrLine: {'line': b'\x1b[01m\x1b[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:11:61:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno matching function for call to \xe2\x80\x98\x1b[01m\x1b[KObstacleDetector::declare_parameter<double>(const char [24], ObstacleDetector::ObstacleDetector()::<lambda()>)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[13.110812] (b_obstacle_detector) StderrLine: {'line': b'   11 |   ignore_angle_range_list_ = \x1b[01;31m\x1b[Kthis->declare_parameter<double>("ignore_angle_range_list",[rad(3.0*pi/16.0), rad(5.0*pi/16.0), rad(11.0*pi/16.0)])\x1b[m\x1b[K;\n'}
+[13.110984] (b_obstacle_detector) StderrLine: {'line': b'      |                              \x1b[01;31m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[13.111143] (b_obstacle_detector) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:1321\x1b[m\x1b[K,\n'}
+[13.111306] (b_obstacle_detector) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28\x1b[m\x1b[K,\n'}
+[13.111481] (b_obstacle_detector) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22\x1b[m\x1b[K,\n'}
+[13.111701] (b_obstacle_detector) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155\x1b[m\x1b[K,\n'}
+[13.111864] (b_obstacle_detector) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/user/ws/src/chibi24_b/b_obstacle_detector/include/b_obstacle_detector/b_obstacle_detector.hpp:5\x1b[m\x1b[K,\n'}
+[13.111990] (b_obstacle_detector) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:1\x1b[m\x1b[K:\n'}
+[13.112262] (b_obstacle_detector) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:195:1:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kauto rclcpp::Node::declare_parameter(const string&, const ParameterT&, const ParameterDescriptor&, bool) [with ParameterT = double; std::string = std::__cxx11::basic_string<char>; rcl_interfaces::msg::ParameterDescriptor = rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[13.112553] (b_obstacle_detector) StderrLine: {'line': b'  195 | \x1b[01;36m\x1b[KNode\x1b[m\x1b[K::declare_parameter(\n'}
+[13.112829] (b_obstacle_detector) StderrLine: {'line': b'      | \x1b[01;36m\x1b[K^~~~\x1b[m\x1b[K\n'}
+[13.112984] (b_obstacle_detector) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:197:22:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  no known conversion for argument 2 from \xe2\x80\x98\x1b[01m\x1b[KObstacleDetector::ObstacleDetector()::<lambda()>\x1b[m\x1b[K\xe2\x80\x99 to \xe2\x80\x98\x1b[01m\x1b[Kconst double&\x1b[m\x1b[K\xe2\x80\x99\n'}
+[13.113159] (b_obstacle_detector) StderrLine: {'line': b'  197 |   \x1b[01;36m\x1b[Kconst ParameterT & default_value\x1b[m\x1b[K,\n'}
+[13.113411] (b_obstacle_detector) StderrLine: {'line': b'      |   \x1b[01;36m\x1b[K~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[13.113595] (b_obstacle_detector) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:215:1:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kauto rclcpp::Node::declare_parameter(const string&, const ParameterDescriptor&, bool) [with ParameterT = double; std::string = std::__cxx11::basic_string<char>; rcl_interfaces::msg::ParameterDescriptor = rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[13.113762] (b_obstacle_detector) StderrLine: {'line': b'  215 | \x1b[01;36m\x1b[KNode\x1b[m\x1b[K::declare_parameter(\n'}
+[13.114025] (b_obstacle_detector) StderrLine: {'line': b'      | \x1b[01;36m\x1b[K^~~~\x1b[m\x1b[K\n'}
+[13.114269] (b_obstacle_detector) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:217:52:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  no known conversion for argument 2 from \xe2\x80\x98\x1b[01m\x1b[KObstacleDetector::ObstacleDetector()::<lambda()>\x1b[m\x1b[K\xe2\x80\x99 to \xe2\x80\x98\x1b[01m\x1b[Kconst ParameterDescriptor&\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kconst rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >&\x1b[m\x1b[K\xe2\x80\x99}\n'}
+[13.114971] (b_obstacle_detector) StderrLine: {'line': b'  217 |   \x1b[01;36m\x1b[Kconst rcl_interfaces::msg::ParameterDescriptor & parameter_descriptor\x1b[m\x1b[K,\n'}
+[13.115221] (b_obstacle_detector) StderrLine: {'line': b'      |   \x1b[01;36m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[13.172310] (-) TimerEvent: {}
+[13.272949] (-) TimerEvent: {}
+[13.373538] (-) TimerEvent: {}
+[13.474185] (-) TimerEvent: {}
+[13.574698] (-) TimerEvent: {}
+[13.675230] (-) TimerEvent: {}
+[13.776006] (-) TimerEvent: {}
+[13.876566] (-) TimerEvent: {}
+[13.977133] (-) TimerEvent: {}
+[14.077595] (-) TimerEvent: {}
+[14.178027] (-) TimerEvent: {}
+[14.278450] (-) TimerEvent: {}
+[14.378963] (-) TimerEvent: {}
+[14.479438] (-) TimerEvent: {}
+[14.580050] (-) TimerEvent: {}
+[14.680663] (-) TimerEvent: {}
+[14.781247] (-) TimerEvent: {}
+[14.881957] (-) TimerEvent: {}
+[14.982620] (-) TimerEvent: {}
+[15.083168] (-) TimerEvent: {}
+[15.183819] (-) TimerEvent: {}
+[15.284495] (-) TimerEvent: {}
+[15.384964] (-) TimerEvent: {}
+[15.485430] (-) TimerEvent: {}
+[15.585877] (-) TimerEvent: {}
+[15.686322] (-) TimerEvent: {}
+[15.786810] (-) TimerEvent: {}
+[15.887250] (-) TimerEvent: {}
+[15.987721] (-) TimerEvent: {}
+[16.088360] (-) TimerEvent: {}
+[16.189148] (-) TimerEvent: {}
+[16.289807] (-) TimerEvent: {}
+[16.390365] (-) TimerEvent: {}
+[16.490874] (-) TimerEvent: {}
+[16.591494] (-) TimerEvent: {}
+[16.692217] (-) TimerEvent: {}
+[16.792763] (-) TimerEvent: {}
+[16.893220] (-) TimerEvent: {}
+[16.994106] (-) TimerEvent: {}
+[17.094786] (-) TimerEvent: {}
+[17.195576] (-) TimerEvent: {}
+[17.296098] (-) TimerEvent: {}
+[17.396685] (-) TimerEvent: {}
+[17.497274] (-) TimerEvent: {}
+[17.597903] (-) TimerEvent: {}
+[17.698729] (-) TimerEvent: {}
+[17.799529] (-) TimerEvent: {}
+[17.900021] (-) TimerEvent: {}
+[18.000592] (-) TimerEvent: {}
+[18.101230] (-) TimerEvent: {}
+[18.202023] (-) TimerEvent: {}
+[18.302549] (-) TimerEvent: {}
+[18.403147] (-) TimerEvent: {}
+[18.464449] (b_obstacle_detector) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/b_obstacle_detector_node.dir/build.make:76: CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o] Error 1\n'}
+[18.466947] (b_obstacle_detector) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/b_obstacle_detector_node.dir/all] Error 2\n'}
+[18.467706] (b_obstacle_detector) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[18.503928] (-) TimerEvent: {}
+[18.523649] (b_obstacle_detector) CommandEnded: {'returncode': 2}
+[18.604146] (-) TimerEvent: {}
+[18.706108] (-) TimerEvent: {}
+[18.805682] (b_obstacle_detector) JobEnded: {'identifier': 'b_obstacle_detector', 'rc': 2}
+[18.807977] (-) TimerEvent: {}
+[18.818738] (-) EventReactorShutdown: {}

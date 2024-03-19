@@ -1,0 +1,91 @@
+[0.000000] (-) TimerEvent: {}
+[0.005394] (b_obstacle_detector) JobQueued: {'identifier': 'b_obstacle_detector', 'dependencies': OrderedDict()}
+[0.006628] (b_obstacle_detector) JobStarted: {'identifier': 'b_obstacle_detector'}
+[0.097958] (-) TimerEvent: {}
+[0.198663] (-) TimerEvent: {}
+[0.287771] (b_obstacle_detector) JobProgress: {'identifier': 'b_obstacle_detector', 'progress': 'cmake'}
+[0.293335] (b_obstacle_detector) JobProgress: {'identifier': 'b_obstacle_detector', 'progress': 'build'}
+[0.296248] (b_obstacle_detector) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/user/ws/src/chibi24_b/build/b_obstacle_detector', '--', '-j8', '-l8'], 'cwd': '/home/user/ws/src/chibi24_b/build/b_obstacle_detector', 'env': OrderedDict([('HOSTNAME', 'docker-desktop'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/user/ws/install/roomba_500driver_meiji/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/user'), ('OLDPWD', '/home/user/ws/src'), ('ROS_PYTHON_VERSION', '3'), ('_colcon_cd_root', '/home/user/ws'), ('COLCON_PREFIX_PATH', '/home/user/ws/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/home/user/ws/install/turtlesim_controller_py:/home/user/ws/install/turtlesim_controller:/home/user/ws/install/third_challenge_suzuki:/home/user/ws/install/third_challenge:/home/user/ws/install/second_challenge_suzuki:/home/user/ws/install/roomba_teleop_meiji:/home/user/ws/install/roomba_description:/home/user/ws/install/first_challenge_suzuki:/home/user/ws/install/roomba_500driver_meiji:/home/user/ws/install/b_obstacle_detector:/home/user/ws/install/b_local_map_creator:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('PWD', '/home/user/ws/src/chibi24_b/build/b_obstacle_detector'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/home/user/ws/build/turtlesim_controller_py:/home/user/ws/install/turtlesim_controller_py/lib/python3.10/site-packages:/home/user/ws/install/roomba_500driver_meiji/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/user/ws/install/turtlesim_controller:/home/user/ws/install/third_challenge_suzuki:/home/user/ws/install/third_challenge:/home/user/ws/install/second_challenge_suzuki:/home/user/ws/install/roomba_teleop_meiji:/home/user/ws/install/roomba_description:/home/user/ws/install/first_challenge_suzuki:/home/user/ws/install/roomba_500driver_meiji:/home/user/ws/install/b_obstacle_detector:/home/user/ws/install/b_local_map_creator:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble')]), 'shell': False}
+[0.326144] (-) TimerEvent: {}
+[0.426851] (-) TimerEvent: {}
+[0.527562] (-) TimerEvent: {}
+[0.628205] (-) TimerEvent: {}
+[0.665539] (b_obstacle_detector) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target b_obstacle_detector_node\x1b[0m\n'}
+[0.728484] (-) TimerEvent: {}
+[0.735434] (b_obstacle_detector) StdoutLine: {'line': b'[ 33%] \x1b[32mBuilding CXX object CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o\x1b[0m\n'}
+[0.737526] (b_obstacle_detector) StdoutLine: {'line': b'[ 66%] \x1b[32mBuilding CXX object CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector_node.cpp.o\x1b[0m\n'}
+[0.828666] (-) TimerEvent: {}
+[0.929328] (-) TimerEvent: {}
+[1.029876] (-) TimerEvent: {}
+[1.130565] (-) TimerEvent: {}
+[1.231394] (-) TimerEvent: {}
+[1.332326] (-) TimerEvent: {}
+[1.433221] (-) TimerEvent: {}
+[1.533922] (-) TimerEvent: {}
+[1.635490] (-) TimerEvent: {}
+[1.736125] (-) TimerEvent: {}
+[1.836874] (-) TimerEvent: {}
+[1.937677] (-) TimerEvent: {}
+[2.038316] (-) TimerEvent: {}
+[2.138960] (-) TimerEvent: {}
+[2.239769] (-) TimerEvent: {}
+[2.340464] (-) TimerEvent: {}
+[2.441211] (-) TimerEvent: {}
+[2.542065] (-) TimerEvent: {}
+[2.642900] (-) TimerEvent: {}
+[2.743775] (-) TimerEvent: {}
+[2.844505] (-) TimerEvent: {}
+[2.945369] (-) TimerEvent: {}
+[3.046057] (-) TimerEvent: {}
+[3.146735] (-) TimerEvent: {}
+[3.247800] (-) TimerEvent: {}
+[3.348519] (-) TimerEvent: {}
+[3.449374] (-) TimerEvent: {}
+[3.550074] (-) TimerEvent: {}
+[3.650862] (-) TimerEvent: {}
+[3.751592] (-) TimerEvent: {}
+[3.860755] (-) TimerEvent: {}
+[3.961317] (-) TimerEvent: {}
+[4.061940] (-) TimerEvent: {}
+[4.162553] (-) TimerEvent: {}
+[4.263255] (-) TimerEvent: {}
+[4.364265] (-) TimerEvent: {}
+[4.465380] (-) TimerEvent: {}
+[4.566026] (-) TimerEvent: {}
+[4.666704] (-) TimerEvent: {}
+[4.767346] (-) TimerEvent: {}
+[4.868004] (-) TimerEvent: {}
+[4.968676] (-) TimerEvent: {}
+[5.069668] (-) TimerEvent: {}
+[5.170590] (-) TimerEvent: {}
+[5.279505] (-) TimerEvent: {}
+[5.380441] (-) TimerEvent: {}
+[5.481868] (-) TimerEvent: {}
+[5.589601] (-) TimerEvent: {}
+[5.690337] (-) TimerEvent: {}
+[5.791287] (-) TimerEvent: {}
+[5.892288] (-) TimerEvent: {}
+[5.993911] (-) TimerEvent: {}
+[6.094792] (-) TimerEvent: {}
+[6.198901] (-) TimerEvent: {}
+[6.299884] (-) TimerEvent: {}
+[6.400774] (-) TimerEvent: {}
+[6.522645] (-) TimerEvent: {}
+[6.623372] (-) TimerEvent: {}
+[6.740541] (-) TimerEvent: {}
+[6.775864] (b_obstacle_detector) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/b_obstacle_detector_node.dir/build.make:76: CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o] Interrupt\n'}
+[6.806475] (b_obstacle_detector) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/b_obstacle_detector_node.dir/build.make:90: CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector_node.cpp.o] Interrupt\n'}
+[6.812577] (b_obstacle_detector) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/b_obstacle_detector_node.dir/all] Interrupt\n'}
+[6.820765] (b_obstacle_detector) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Interrupt\n'}
+[6.840924] (-) TimerEvent: {}
+[6.890216] (b_obstacle_detector) CommandEnded: {'returncode': -2}
+[6.941130] (-) TimerEvent: {}
+[7.044762] (-) TimerEvent: {}
+[7.152766] (-) TimerEvent: {}
+[7.253414] (-) TimerEvent: {}
+[7.354197] (-) TimerEvent: {}
+[7.455704] (-) TimerEvent: {}
+[7.557960] (-) TimerEvent: {}
+[7.663714] (-) TimerEvent: {}
+[7.701314] (b_obstacle_detector) JobEnded: {'identifier': 'b_obstacle_detector', 'rc': 'SIGINT'}
+[7.715517] (-) EventReactorShutdown: {}

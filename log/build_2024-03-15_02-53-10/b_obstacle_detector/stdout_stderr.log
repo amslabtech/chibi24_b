@@ -1,0 +1,9 @@
+[35m[1mConsolidate compiler generated dependencies of target b_obstacle_detector_node[0m
+[ 33%] [32mBuilding CXX object CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o[0m
+[01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:[m[K In member function ‘[01m[Kvoid ObstacleDetector::scan_obstacle()[m[K’:
+[01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:75:35:[m[K [01;31m[Kerror: [m[Kbase operand of ‘[01m[K->[m[K’ has non-pointer type ‘[01m[Kgeometry_msgs::msg::PoseArray_<std::allocator<void> >::_poses_type[m[K’ {aka ‘[01m[Kstd::vector<geometry_msgs::msg::Pose_<std::allocator<void> >, std::allocator<geometry_msgs::msg::Pose_<std::allocator<void> > > >[m[K’}
+   75 |         obstacle_pose_array_.poses[01;31m[K->[m[Kpush_back(obstacle_pose_array_);
+      |                                   [01;31m[K^~[m[K
+gmake[2]: *** [CMakeFiles/b_obstacle_detector_node.dir/build.make:76: CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/b_obstacle_detector_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

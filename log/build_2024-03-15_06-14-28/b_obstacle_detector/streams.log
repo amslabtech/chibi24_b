@@ -1,0 +1,29 @@
+[0.352s] Invoking command in '/home/user/ws/src/chibi24_b/build/b_obstacle_detector': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble /usr/bin/cmake --build /home/user/ws/src/chibi24_b/build/b_obstacle_detector -- -j8 -l8
+[0.432s] [35m[1mConsolidate compiler generated dependencies of target b_obstacle_detector_node[0m
+[0.480s] [ 33%] [32mBuilding CXX object CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o[0m
+[7.528s] [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:[m[K In constructor ‘[01m[KObstacleDetector::ObstacleDetector()[m[K’:
+[7.529s] [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:11:61:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KObstacleDetector::declare_parameter<double>(const char [24], <brace-enclosed initializer list>)[m[K’
+[7.529s]    11 |   ignore_angle_range_list_ = [01;31m[Kthis->declare_parameter<double>("ignore_angle_range_list",{(3.0*M_PI/16.0), (5.0*M_PI/16.0), (11.0*M_PI/16.0)})[m[K;
+[7.529s]       |                              [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[7.531s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:1321[m[K,
+[7.531s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+[7.531s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22[m[K,
+[7.532s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.532s]                  from [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/include/b_obstacle_detector/b_obstacle_detector.hpp:5[m[K,
+[7.532s]                  from [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:1[m[K:
+[7.533s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:195:1:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kauto rclcpp::Node::declare_parameter(const string&, const ParameterT&, const ParameterDescriptor&, bool) [with ParameterT = double; std::string = std::__cxx11::basic_string<char>; rcl_interfaces::msg::ParameterDescriptor = rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >][m[K’
+[7.533s]   195 | [01;36m[KNode[m[K::declare_parameter(
+[7.534s]       | [01;36m[K^~~~[m[K
+[7.534s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:197:22:[m[K [01;36m[Knote: [m[K  no known conversion for argument 2 from ‘[01m[K<brace-enclosed initializer list>[m[K’ to ‘[01m[Kconst double&[m[K’
+[7.534s]   197 |   [01;36m[Kconst ParameterT & default_value[m[K,
+[7.534s]       |   [01;36m[K~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~[m[K
+[7.534s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:215:1:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kauto rclcpp::Node::declare_parameter(const string&, const ParameterDescriptor&, bool) [with ParameterT = double; std::string = std::__cxx11::basic_string<char>; rcl_interfaces::msg::ParameterDescriptor = rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >][m[K’
+[7.535s]   215 | [01;36m[KNode[m[K::declare_parameter(
+[7.535s]       | [01;36m[K^~~~[m[K
+[7.535s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:217:52:[m[K [01;36m[Knote: [m[K  no known conversion for argument 2 from ‘[01m[K<brace-enclosed initializer list>[m[K’ to ‘[01m[Kconst ParameterDescriptor&[m[K’ {aka ‘[01m[Kconst rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >&[m[K’}
+[7.535s]   217 |   [01;36m[Kconst rcl_interfaces::msg::ParameterDescriptor & parameter_descriptor[m[K,
+[7.535s]       |   [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~[m[K
+[16.160s] gmake[2]: *** [CMakeFiles/b_obstacle_detector_node.dir/build.make:76: CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o] Error 1
+[16.161s] gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/b_obstacle_detector_node.dir/all] Error 2
+[16.162s] gmake: *** [Makefile:146: all] Error 2
+[16.168s] Invoked command in '/home/user/ws/src/chibi24_b/build/b_obstacle_detector' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble /usr/bin/cmake --build /home/user/ws/src/chibi24_b/build/b_obstacle_detector -- -j8 -l8

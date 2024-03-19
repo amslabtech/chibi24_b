@@ -1,16 +1,18 @@
 #include "b_obstacle_detector/b_obstacle_detector.hpp"
 
-ObstacleDetector::ObstacleDetector(const std::string& b_obstacle_detector_topic,const std::string& b_obstacle_detector,const rclcpp::NodeOptions & node_options)
-: Node("b_obstacle_detector",node_options)
+ObstacleDetector::ObstacleDetector()
+: Node("b_obstacle_detector")
 {
-  // timer
-  // timer_ = this->create_wall_timer(<周期間隔>, std::bind(&<class名>::<callback関数名, this));
-  auto hz_ = this->get_parameter("hz").as_int();
-  auto ignore_dist_ = this->get_parameter("ignore_dist").as_double();
-  auto laser_step_ = this->get_parameter("laser_step").as_int(); 
-  auto ignore_angle_range_list_ = this->get_parameter("ignore_angle_range_list").as_double();
-
-
+  std::cout << __LINE__ << std::endl;
+  timer_ = this->create_wall_timer(0.5s, std::bind(&ObstacleDetector::timer_callback, this));
+  //auto hz_ = this->get_parameter("hz").as_int();
+  std::cout << __LINE__ << std::endl;
+  ignore_dist_ = this->declare_parameter<double>("ignore_dist",3);
+  std::cout << __LINE__ << std::endl;
+  laser_step_ = this->declare_parameter<int>("laser_step",0.01); 
+  std::cout << __LINE__ << std::endl;
+  ignore_angle_range_list_ = this->declare_parameter<std::vector<double>>("ignore_angle_range_list",{(3.0*M_PI/16.0), (5.0*M_PI/16.0), (11.0*M_PI/16.0)});
+  std::cout << __LINE__ << std::endl;
 
   scan_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>("/scan",rclcpp::QoS(1).reliable(),std::bind(&ObstacleDetector::scan_callback,this,std::placeholders::_1));
   obstacle_pose_pub_ = this->create_publisher<geometry_msgs::msg::PoseArray>("/obstacle_pose",rclcpp::QoS(1).reliable());
@@ -44,8 +46,10 @@ void ObstacleDetector::process()
         {
             scan_obstacle();
         }
-        //rclcpp::spin_some();
-        //loop_rate.sleep();
+        auto node_ = rclcpp::Node::make_shared("b_obstacle_detector_node");
+        rclcpp::spin_some(node_);
+        rclcpp::WallRate loop_rate(500ms);
+        loop_rate.sleep();
     }
 }
 
@@ -70,12 +74,12 @@ void ObstacleDetector::scan_obstacle()
             continue;
         }
 
-        obstacle_pose_array_.poses[i].position.x = range * cos(angle);
-        obstacle_pose_array_.poses[i].position.y = range * sin(angle);
-        //obstacle_pose_array_.poses.push_back(obs_pose);
-
+        geometry_msgs::msg::Pose obs_pose;
+        obs_pose.position.x = range * cos(angle);
+        obs_pose.position.y = range * sin(angle);
+        obstacle_pose_array_.poses.push_back(obs_pose);
     }
-    //obstacle_pose_pub_.publish(obstacle_pose_array_);
+    obstacle_pose_pub_->publish(obstacle_pose_array_);
 }
 
 

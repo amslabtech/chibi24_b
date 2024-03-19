@@ -1,0 +1,11 @@
+[0.545s] Invoking command in '/home/user/ws/src/chibi24_b/build/b_obstacle_detector': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble /usr/bin/cmake --build /home/user/ws/src/chibi24_b/build/b_obstacle_detector -- -j8 -l8
+[1.193s] [35m[1mConsolidate compiler generated dependencies of target b_obstacle_detector_node[0m
+[1.328s] [ 33%] [32mBuilding CXX object CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o[0m
+[22.312s] [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:[m[K In member function ‘[01m[Kvoid ObstacleDetector::scan_obstacle()[m[K’:
+[22.313s] [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:75:46:[m[K [01;31m[Kerror: [m[K‘[01m[Kobs_pose[m[K’ was not declared in this scope
+[22.313s]    75 |         obstacle_pose_array_.poses.push_back([01;31m[Kobs_pose[m[K);
+[22.313s]       |                                              [01;31m[K^~~~~~~~[m[K
+[35.095s] gmake[2]: *** [CMakeFiles/b_obstacle_detector_node.dir/build.make:76: CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o] Error 1
+[35.096s] gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/b_obstacle_detector_node.dir/all] Error 2
+[35.096s] gmake: *** [Makefile:146: all] Error 2
+[35.106s] Invoked command in '/home/user/ws/src/chibi24_b/build/b_obstacle_detector' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble /usr/bin/cmake --build /home/user/ws/src/chibi24_b/build/b_obstacle_detector -- -j8 -l8

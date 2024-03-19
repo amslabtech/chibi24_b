@@ -1,0 +1,38 @@
+[0.099s] Invoking command in '/home/user/ws/src/chibi24_b/build/b_obstacle_detector': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble /usr/bin/cmake --build /home/user/ws/src/chibi24_b/build/b_obstacle_detector -- -j8 -l8
+[0.157s] [35m[1mConsolidate compiler generated dependencies of target b_obstacle_detector_node[0m
+[0.184s] [ 33%] [32mBuilding CXX object CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o[0m
+[4.405s] [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:[m[K In constructor ‘[01m[KObstacleDetector::ObstacleDetector()[m[K’:
+[4.405s] [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:11:110:[m[K [01;31m[Kerror: [m[K‘[01m[Kpi[m[K’ was not declared in this scope
+[4.405s]    11 | are_parameter<std::vector<double>>("ignore_angle_range_list",{rad(3.0*[01;31m[Kpi[m[K/16.0), rad(5.0*pi/16.0), rad(11.0*pi/16.0)});
+[4.405s]       |                                                                       [01;31m[K^~[m[K
+[4.406s] 
+[4.412s] [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:11:102:[m[K [01;31m[Kerror: [m[K‘[01m[Krad[m[K’ was not declared in this scope; did you mean ‘[01m[Kread[m[K’?
+[4.413s]    11 | is->declare_parameter<std::vector<double>>("ignore_angle_range_list",{[01;31m[Krad[m[K(3.0*pi/16.0), rad(5.0*pi/16.0), rad(11.0*pi/16.0)});
+[4.413s]       |                                                                       [01;31m[K^~~[m[K
+[4.413s]       |                                                                       [32m[Kread[m[K
+[4.414s] [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:11:74:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KObstacleDetector::declare_parameter<std::vector<double, std::allocator<double> > >(const char [24], <brace-enclosed initializer list>)[m[K’
+[4.414s]    11 | gnore_angle_range_list_ = [01;31m[Kthis->declare_parameter<std::vector<double>>("ignore_angle_range_list",{rad(3.0*pi/16.0), rad(5.0*pi/16.0), rad(11.0*pi/16.0)})[m[K;
+[4.414s]       |                           [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.414s] 
+[4.414s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:1321[m[K,
+[4.415s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+[4.415s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22[m[K,
+[4.415s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[4.415s]                  from [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/include/b_obstacle_detector/b_obstacle_detector.hpp:5[m[K,
+[4.415s]                  from [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:1[m[K:
+[4.415s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:195:1:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kauto rclcpp::Node::declare_parameter(const string&, const ParameterT&, const ParameterDescriptor&, bool) [with ParameterT = std::vector<double, std::allocator<double> >; std::string = std::__cxx11::basic_string<char>; rcl_interfaces::msg::ParameterDescriptor = rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >][m[K’
+[4.416s]   195 | [01;36m[KNode[m[K::declare_parameter(
+[4.416s]       | [01;36m[K^~~~[m[K
+[4.416s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:197:22:[m[K [01;36m[Knote: [m[K  no known conversion for argument 2 from ‘[01m[K<brace-enclosed initializer list>[m[K’ to ‘[01m[Kconst std::vector<double, std::allocator<double> >&[m[K’
+[4.416s]   197 |   [01;36m[Kconst ParameterT & default_value[m[K,
+[4.416s]       |   [01;36m[K~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~[m[K
+[4.416s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:215:1:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kauto rclcpp::Node::declare_parameter(const string&, const ParameterDescriptor&, bool) [with ParameterT = std::vector<double, std::allocator<double> >; std::string = std::__cxx11::basic_string<char>; rcl_interfaces::msg::ParameterDescriptor = rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >][m[K’
+[4.416s]   215 | [01;36m[KNode[m[K::declare_parameter(
+[4.417s]       | [01;36m[K^~~~[m[K
+[4.417s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:217:52:[m[K [01;36m[Knote: [m[K  no known conversion for argument 2 from ‘[01m[K<brace-enclosed initializer list>[m[K’ to ‘[01m[Kconst ParameterDescriptor&[m[K’ {aka ‘[01m[Kconst rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >&[m[K’}
+[4.417s]   217 |   [01;36m[Kconst rcl_interfaces::msg::ParameterDescriptor & parameter_descriptor[m[K,
+[4.417s]       |   [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~[m[K
+[9.017s] gmake[2]: *** [CMakeFiles/b_obstacle_detector_node.dir/build.make:76: CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o] Error 1
+[9.018s] gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/b_obstacle_detector_node.dir/all] Error 2
+[9.019s] gmake: *** [Makefile:146: all] Error 2
+[9.027s] Invoked command in '/home/user/ws/src/chibi24_b/build/b_obstacle_detector' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble /usr/bin/cmake --build /home/user/ws/src/chibi24_b/build/b_obstacle_detector -- -j8 -l8
