@@ -1,0 +1,17 @@
+[01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:[m[K In member function ‘[01m[Kvoid ObstacleDetector::scan_obstacle()[m[K’:
+[01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:73:24:[m[K [01;31m[Kerror: [m[K‘[01m[KPose[m[K’ is not a member of ‘[01m[Kgeometry_msgs[m[K’; did you mean ‘[01m[Kgeometry_msgs::msg::Pose[m[K’?
+   73 |         geometry_msgs::[01;31m[KPose[m[K obs_pose;
+      |                        [01;31m[K^~~~[m[K
+In file included from [01m[K/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/pose_array__struct.hpp:22[m[K,
+                 from [01m[K/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/pose_array.hpp:7[m[K,
+                 from [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/include/b_obstacle_detector/b_obstacle_detector.hpp:10[m[K,
+                 from [01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:1[m[K:
+[01m[K/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/pose__struct.hpp:135:7:[m[K [01;36m[Knote: [m[K‘[01m[Kgeometry_msgs::msg::Pose[m[K’ declared here
+  135 | using [01;36m[KPose[m[K =
+      |       [01;36m[K^~~~[m[K
+[01m[K/home/user/ws/src/chibi24_b/b_obstacle_detector/src/b_obstacle_detector.cpp:74:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kobs_pose[m[K’ was not declared in this scope
+   74 |         [01;31m[Kobs_pose[m[K.position.x = range * cos(angle);
+      |         [01;31m[K^~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/b_obstacle_detector_node.dir/build.make:76: CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/b_obstacle_detector_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

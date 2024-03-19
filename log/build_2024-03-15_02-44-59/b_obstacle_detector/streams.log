@@ -1,0 +1,31 @@
+[0.176s] Invoking command in '/home/user/ws/src/chibi24_b/build/b_obstacle_detector': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble /usr/bin/cmake --build /home/user/ws/src/chibi24_b/build/b_obstacle_detector -- -j8 -l8
+[0.656s] [35m[1mConsolidate compiler generated dependencies of target b_obstacle_detector_node[0m
+[0.757s] [ 33%] [32mBuilding CXX object CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector.cpp.o[0m
+[0.760s] [ 66%] [32mBuilding CXX object CMakeFiles/b_obstacle_detector_node.dir/src/b_obstacle_detector_node.cpp.o[0m
+[51.964s] [100%] [32m[1mLinking CXX executable b_obstacle_detector_node[0m
+[52.731s] [100%] Built target b_obstacle_detector_node
+[52.870s] Invoked command in '/home/user/ws/src/chibi24_b/build/b_obstacle_detector' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble /usr/bin/cmake --build /home/user/ws/src/chibi24_b/build/b_obstacle_detector -- -j8 -l8
+[53.102s] Invoking command in '/home/user/ws/src/chibi24_b/build/b_obstacle_detector': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble /usr/bin/cmake --install /home/user/ws/src/chibi24_b/build/b_obstacle_detector
+[53.159s] -- Install configuration: "RelWithDebInfo"
+[53.178s] -- Execute custom install script
+[53.210s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector//launch/b_obstacle_detector.launch.xml
+[53.257s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/include/b_obstacle_detector/b_obstacle_detector.hpp
+[53.305s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/lib/b_obstacle_detector/b_obstacle_detector_node
+[53.350s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/ament_index/resource_index/package_run_dependencies/b_obstacle_detector
+[53.382s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/ament_index/resource_index/parent_prefix_path/b_obstacle_detector
+[53.425s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/environment/ament_prefix_path.sh
+[53.455s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/environment/ament_prefix_path.dsv
+[53.497s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/environment/path.sh
+[53.534s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/environment/path.dsv
+[53.564s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/local_setup.bash
+[53.591s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/local_setup.sh
+[53.617s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/local_setup.zsh
+[53.643s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/local_setup.dsv
+[53.671s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/package.dsv
+[53.699s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/ament_index/resource_index/packages/b_obstacle_detector
+[53.727s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/cmake/ament_cmake_export_dependencies-extras.cmake
+[53.758s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/cmake/ament_cmake_export_include_directories-extras.cmake
+[53.791s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/cmake/b_obstacle_detectorConfig.cmake
+[53.818s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/cmake/b_obstacle_detectorConfig-version.cmake
+[53.841s] -- Symlinking: /home/user/ws/src/chibi24_b/install/b_obstacle_detector/share/b_obstacle_detector/package.xml
+[53.898s] Invoked command in '/home/user/ws/src/chibi24_b/build/b_obstacle_detector' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/ws/install/turtlesim_controller_py:/opt/ros/humble /usr/bin/cmake --install /home/user/ws/src/chibi24_b/build/b_obstacle_detector

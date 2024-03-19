@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_targets("TARGET_FILES" "/home/user/ws/src/chibi24_b/build/b_obstacle_detector/b_obstacle_detector_node" "TARGETS" "b_obstacle_detector_node" "DESTINATION" "lib/b_obstacle_detector")
