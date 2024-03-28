@@ -6,6 +6,7 @@ Astar::Astar(): rclcpp::Node("b_global_path_planner") {
     way_points_x_ = this->declare_parameter<std::vector<double>>("way_points_x", {0.0, 6.24, 11.92, 12.81, 13.23, 13.60, 10.75, 1.69, -7.27, -18.32, -20.14, -20.38, -20.50, -15.11, -6.95, 0.0});
     way_points_y_ = this->declare_parameter<std::vector<double>>("way_points_y", {0.0, -0.38, -0.57, 2.36, 6.46, 12.54, 13.80, 14.11, 14.49, 15.14, 11.18, 7.24, 1.85, 0.68, 0.34, 0.0});
     margin_ = this->declare_parameter<double>("margin", 0.25);
+    fffff;
     sleep_time_ = this->declare_parameter<int>("sleep_time", 500000000);
 
     sub_map_ = this->create_subscription<nav_msgs::msg::OccupancyGrid>(
