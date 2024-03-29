@@ -8,8 +8,8 @@
  * @copyright Copyright (c) 2023
  * 
  */
-#ifndef POSE_HPP
-#define POSE_HPP
+#ifndef B_POSE_HPP
+#define B_POSE_HPP
 
 #include <cmath>
 

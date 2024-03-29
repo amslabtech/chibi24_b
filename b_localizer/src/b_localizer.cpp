@@ -5,34 +5,60 @@ emcl: mcl with expansion resetting
 #include "b_localizer/b_localizer.hpp"
 
 // コンストラクタ
-EMCL::EMCL():Node("emcl")
+EMCL::EMCL():Node("b_localizer")
 {
+   // パラメータの設定(EMCL)
+    this -> declare_parameter("flag_init_noise", true);
+    this -> declare_parameter("flag_broadcast", true);
+    this -> declare_parameter("is_visible", true);
+    this -> declare_parameter("hz", 10);
+    this -> declare_parameter("particle_num", 500);
+    this -> declare_parameter("move_dist_th", 0.2);
+    this -> declare_parameter("init_x", 0.0);
+    this -> declare_parameter("init_y", 0.0);
+    this -> declare_parameter("init_yaw", 0.0);
+    this -> declare_parameter("init_x_dev", 0.50);
+    this -> declare_parameter("init_y_dev", 0.65);
+    this -> declare_parameter("init_yaw_dev", 0.5);
+    this -> declare_parameter("alpha_th", 0.0017);
+    this -> declare_parameter("reset_count_limit", 5);
+    this -> declare_parameter("expansion_x_dev", 0.05);
+    this -> declare_parameter("expansion_y_dev", 0.05);
+    this -> declare_parameter("expansion_yaw_dev", 0.01);
+    this -> declare_parameter("laser_step", 10);
+    this -> declare_parameter("sensor_noise_ratio", 0.03);
+    this -> declare_parameter("ignore_angle_range_list",std::vector<double>({0.0,0.0,0.0}));
+    // パラメータの設定(OdomModel)
+    this -> declare_parameter("ff", 0.17);
+    this -> declare_parameter("fr", 0.0005);
+    this -> declare_parameter("rf", 0.13);
+    this -> declare_parameter("rr", 0.2); 
     // パラメータの取得(EMCL)
-    this -> get_parameter<bool>("flag_init_noise", flag_init_noise_);
-    this -> get_parameter<bool>("flag_broadcast", flag_broadcast_);
-    this -> get_parameter<bool>("is_visible", is_visible_);
-    this -> get_parameter<int>("hz", hz_);
-    this -> get_parameter<int>("particle_num", particle_num_);
-    this -> get_parameter<double>("move_dist_th", move_dist_th_);
-    this -> get_parameter<double>("init_x", init_x_);
-    this -> get_parameter<double>("init_y", init_y_);
-    this -> get_parameter<double>("init_yaw", init_yaw_);
-    this -> get_parameter<double>("init_x_dev", init_x_dev_);
-    this -> get_parameter<double>("init_y_dev", init_y_dev_);
-    this -> get_parameter<double>("init_yaw_dev", init_yaw_dev_);
-    this -> get_parameter<double>("alpha_th", alpha_th_);
-    this -> get_parameter<int>("reset_count_limit", reset_count_limit_);
-    this -> get_parameter<double>("expansion_x_dev", expansion_x_dev_);
-    this -> get_parameter<double>("expansion_y_dev", expansion_y_dev_);
-    this -> get_parameter<double>("expansion_yaw_dev", expansion_yaw_dev_);
-    this -> get_parameter<int>("laser_step", laser_step_);
-    this -> get_parameter<double>("sensor_noise_ratio", sensor_noise_ratio_);
-    this -> get_parameter<std::vector<double>>("ignore_angle_range_list", ignore_angle_range_list_);
+    this -> get_parameter("flag_init_noise", flag_init_noise_);
+    this -> get_parameter("flag_broadcast", flag_broadcast_);
+    this -> get_parameter("is_visible", is_visible_);
+    this -> get_parameter("hz", hz_);
+    this -> get_parameter("particle_num", particle_num_);
+    this -> get_parameter("move_dist_th", move_dist_th_);
+    this -> get_parameter("init_x", init_x_);
+    this -> get_parameter("init_y", init_y_);
+    this -> get_parameter("init_yaw", init_yaw_);
+    this -> get_parameter("init_x_dev", init_x_dev_);
+    this -> get_parameter("init_y_dev", init_y_dev_);
+    this -> get_parameter("init_yaw_dev", init_yaw_dev_);
+    this -> get_parameter("alpha_th", alpha_th_);
+    this -> get_parameter("reset_count_limit", reset_count_limit_);
+    this -> get_parameter("expansion_x_dev", expansion_x_dev_);
+    this -> get_parameter("expansion_y_dev", expansion_y_dev_);
+    this -> get_parameter("expansion_yaw_dev", expansion_yaw_dev_);
+    this -> get_parameter("laser_step", laser_step_);
+    this -> get_parameter("sensor_noise_ratio", sensor_noise_ratio_);
+    this -> get_parameter("ignore_angle_range_list", ignore_angle_range_list_);
     // パラメータの取得(OdomModel)
-    this -> get_parameter<double>("ff", ff_);
-    this -> get_parameter<double>("fr", fr_);
-    this -> get_parameter<double>("rf", rf_);
-    this -> get_parameter<double>("rr", rr_);
+    this -> get_parameter("ff", ff_);
+    this -> get_parameter("fr", fr_);
+    this -> get_parameter("rf", rf_);
+    this -> get_parameter("rr", rr_);
 
     
 
@@ -45,18 +71,21 @@ EMCL::EMCL():Node("emcl")
     // odometryのモデルの初期化
     odom_model_ = OdomModel(ff_, fr_, rf_, rr_);
 
+    
+
     // Subscriber
     sub_map_   = this->create_subscription<nav_msgs::msg::OccupancyGrid>(
     "/map", rclcpp::QoS(1).reliable(),
     std::bind(&EMCL::map_callback, this, std::placeholders::_1));
 
     sub_odom_  = this->create_subscription<nav_msgs::msg::Odometry>(
-    "/roomba/odometry", rclcpp::QoS(1).reliable(),
+    "/odom", rclcpp::QoS(1).reliable(),
     std::bind(&EMCL::odom_callback, this, std::placeholders::_1));
     
     sub_laser_  = this->create_subscription<sensor_msgs::msg::LaserScan>(
     "/scan", rclcpp::QoS(1).reliable(),
     std::bind(&EMCL::laser_callback, this, std::placeholders::_1));
+    //printf("subscription\n");
 
     // Publisher
     pub_estimated_pose_ = this->create_publisher<geometry_msgs::msg::PoseStamped>(
@@ -64,6 +93,7 @@ EMCL::EMCL():Node("emcl")
 
     pub_particle_cloud_ = this->create_publisher<geometry_msgs::msg::PoseArray>(
     "/particle_cloud", rclcpp::QoS(1).reliable());
+    //printf("publisher\n");
 
 }
 
@@ -72,11 +102,13 @@ void EMCL::map_callback(const nav_msgs::msg::OccupancyGrid::SharedPtr msg)
 {
     map_      = *msg;
     flag_map_ = true;
+    printf("m_c\n");
 }
 
 // odometryのコールバック関数
 void EMCL::odom_callback(const nav_msgs::msg::Odometry::SharedPtr msg)
 {
+    printf("o_c\n");
     prev_odom_ = last_odom_;
     last_odom_ = *msg;
     flag_odom_ = true;
@@ -88,40 +120,41 @@ void EMCL::odom_callback(const nav_msgs::msg::Odometry::SharedPtr msg)
         if(move_dist_th_ < hypot(dx, dy)) // 動き出したらフラグを立てる
             flag_move_ = true;
     }
+
 }
 
 // laserのコールバック関数
 void EMCL::laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
 {
+    printf("l_c\n");
     laser_      = *msg;
     flag_laser_ = true;
 }
 
+int EMCL::getOdomFreq() { return hz_; }
+
 // 唯一，main文で実行する関数
 void EMCL::process()
-{
-    rclcpp::Rate loop_rate(hz_); // 制御周波数の設定
-    initialize();             // パーティクルの初期化
-
-    while(rclcpp::ok())
+{             // パーティクルの初期化
+    printf("plocess_0\n");
+    if(flag_map_ and flag_odom_ and flag_laser_)
     {
-        if(flag_map_ and flag_odom_ and flag_laser_)
+        printf("plocess_1\n");
+        broadcast_odom_state(); // map座標系とodom座標系の関係を報告
+        if(flag_move_)
         {
-            broadcast_odom_state(); // map座標系とodom座標系の関係を報告
-            if(flag_move_)
-            {
-                localize(); // 自己位置推定
-            }
-            else
-            {
-                publish_estimated_pose(); // 推定位置のパブリッシュ
-                publish_particles();      // パーティクルクラウドのパブリッシュ
-            }
+            localize(); // 自己位置推定
+            printf("localize\n");
         }
-        std::shared_ptr<EMCL> emcl = std::make_shared<EMCL>();
-        rclcpp::spin(emcl);   // コールバック関数の実行
-        loop_rate.sleep(); // 周期が終わるまで待つ
+        else
+        {
+            publish_estimated_pose(); // 推定位置のパブリッシュ
+            publish_particles();      // パーティクルクラウドのパブリッシュ
+            printf("publish_\n");
+        }
+    
     }
+    printf("process_3\n");
 }
 
 // パーティクル，推定位置の初期化
@@ -131,6 +164,7 @@ void EMCL::initialize()
     estimated_pose_.set(init_x_, init_y_, init_yaw_);
 
     Particle particle;
+    printf("!0\n");
 
     for(int i=0; i<particle_num_; i++)
     {
@@ -141,6 +175,7 @@ void EMCL::initialize()
             const double yaw = norm_rv(init_yaw_, init_yaw_dev_);
             particle.pose_.set(x, y, yaw);
             particle.pose_.normalize_angle();
+            printf("1\n");
         }
         else
         {
@@ -149,25 +184,31 @@ void EMCL::initialize()
             const double yaw = init_yaw_;
             particle.pose_.set(x, y, yaw);
             particle.pose_.normalize_angle();
+            printf("2\n");
         }
         particles_.push_back(particle);
     }
 
     reset_weight(); // 重みの初期化
+    printf("initialize\n");
 }
 
 // ランダム変数生成関数（正規分布）
 double EMCL::norm_rv(const double mean, const double stddev)
 {
     std::normal_distribution<> norm_dist(mean, stddev);
+    printf("norm_rv");
     return norm_dist(engine_);
 }
 
 // 重みの初期化
 void EMCL::reset_weight()
 {
-    for(auto& p : particles_)
+    for(auto& p : particles_){
         p.set_weight(1.0/particles_.size());
+        printf("\n");
+    }
+    printf("reset_weight\n");
 }
 
 // map座標系とodom座標系の関係を報告
@@ -221,6 +262,7 @@ void EMCL::broadcast_odom_state()
         // tf情報をbroadcast(座標系の設定)
         odom_state_broadcaster.sendTransform(odom_state);
         // odom_state_broadcaster_.sendTransform(odom_state);
+        printf("broadcast_odom_state\n");
     }
 }
 
@@ -229,6 +271,7 @@ double EMCL::normalize_angle(double angle)
 {
     while(M_PI  < angle) angle -= 2.0*M_PI;
     while(angle < -M_PI) angle += 2.0*M_PI;
+    printf("norm_angle\n");
 
     return angle;
 }
@@ -240,6 +283,7 @@ void EMCL::localize()
     observation_update();     // 観測更新（位置推定・リサンプリングを含む）
     publish_estimated_pose(); // 推定位置のパブリッシュ
     publish_particles();      // パーティクルクラウドのパブリッシュ
+    printf("localize\n");
 }
 
 // 動作更新
@@ -262,8 +306,10 @@ void EMCL::motion_update()
     odom_model_.set_dev(length, dyaw);
 
     // 全パーティルクの移動
-    for(auto& p : particles_)
+    for(auto& p : particles_){
         p.pose_.move(length, direction, dyaw, odom_model_.get_fw_noise(), odom_model_.get_rot_noise());
+    }
+    printf("motion_update\n");
 }
 
 // 観測更新（位置推定・リサンプリングを含む）
@@ -293,15 +339,17 @@ void EMCL::observation_update()
         resampling();    // リサンプリング
         reset_counter = 0;
     }
+    printf("observation_update");
 }
 
 // 周辺尤度の算出
 double EMCL::calc_marginal_likelihood()
 {
     double sum = 0.0;
-    for(const auto& p : particles_)
+    for(const auto& p : particles_){
         sum += p.weight();
-
+    }
+    printf("calc_marginal_likelihood\n");
     return sum;
 }
 
@@ -312,6 +360,7 @@ void EMCL::estimate_pose()
     weighted_mean_pose(); // 加重平均
     // max_weight_pose(); // 最大の重みを有するポーズ
     // median_pose(); // 中央値
+    printf("estimate_pose\n");
 }
 
 // 推定位置の決定（平均）
@@ -358,6 +407,7 @@ void EMCL::weighted_mean_pose()
     }
 
     estimated_pose_.set(x_mean, y_mean, yaw_mean);
+    printf("weighted_mean_pose\n");
 }
 
 // 重みの正規化
@@ -367,8 +417,10 @@ void EMCL::normalize_belief()
     const double weight_sum = calc_marginal_likelihood();
 
     // 正規化
-    for(auto& p : particles_)
+    for(auto& p : particles_){
         p.set_weight(p.weight() / weight_sum);
+    }
+    printf("noomalize_belief\n");
 }
 
 // 推定位置の決定（最大の重みを有するポーズ）
@@ -404,16 +456,19 @@ void EMCL::median_pose()
     const double y_median   = get_median(y_list);
     const double yaw_median = get_median(yaw_list);
     estimated_pose_.set(x_median, y_median, yaw_median);
+    printf("median_pose\n");
 }
 
 // 配列の中央値を返す
 double EMCL::get_median(std::vector<double>& data)
 {
     sort(begin(data), end(data));
-    if(data.size()%2 == 1)
+    if(data.size()%2 == 1){
         return data[(data.size()-1) / 2];
-    else
+    }else{
         return (data[data.size()/2 - 1] + data[data.size()/2]) / 2.0;
+    }
+    printf("get_mediam\n");
 }
 
 // 膨張リセット
@@ -431,6 +486,7 @@ void EMCL::expansion_resetting()
 
     // 重みを初期化
     reset_weight();
+    printf("expansion_resetting\n");
 }
 
 // リサンプリング（系統サンプリング）
@@ -471,6 +527,7 @@ void EMCL::resampling()
 
     // 重みを初期化
     reset_weight();
+    printf("resampling\n");
 }
 
 // 推定位置のパブリッシュ
@@ -485,6 +542,7 @@ void EMCL::publish_estimated_pose()
     tf2::convert(q,estimated_pose_msg_.pose.orientation);
 
     pub_estimated_pose_ -> publish(estimated_pose_msg_);
+    printf("publish_estimated_pose\n");
 }
 
 // パーティクルクラウドのパブリッシュ
@@ -511,4 +569,5 @@ void EMCL::publish_particles()
 
         pub_particle_cloud_ -> publish(particle_cloud_msg_);
     }
+    printf("publish_particles\n");
 }

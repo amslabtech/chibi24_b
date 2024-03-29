@@ -1,5 +1,5 @@
-#ifndef PARTICLE_HPP
-#define PARTICLE_HPP
+#ifndef B_PARTICLE_HPP
+#define B_PARTICLE_HPP
 
 #include <nav_msgs/msg/occupancy_grid.hpp>
 #include <sensor_msgs/msg/laser_scan.hpp>

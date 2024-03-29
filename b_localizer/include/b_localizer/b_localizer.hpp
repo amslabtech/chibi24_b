@@ -2,8 +2,8 @@
 emcl: mcl with expansion resetting
 */
 
-#ifndef LOCALIZER_HPP
-#define LOCALIZER_HPP
+#ifndef B_LOCALIZER_HPP
+#define B_LOCALIZER_HPP
 
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/laser_scan.hpp>
@@ -16,6 +16,7 @@ emcl: mcl with expansion resetting
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 #include <tf2_ros/transform_broadcaster.h>
 #include <tf2/convert.h>
+#include <math.h>
 
 #include <random>
 
@@ -29,6 +30,8 @@ class EMCL: public rclcpp::Node
 public:
     EMCL(); // デフォルトコンストラクタ
     void process();
+    int getOdomFreq();
+    void   initialize();  
 
 private:
     // ----- 関数（引数あり）------
@@ -44,7 +47,7 @@ private:
 
 
     // ----- 関数（引数なし）------
-    void   initialize();               // パーティクルの初期化
+                 // パーティクルの初期化
     void   reset_weight();             // 重みの初期化
     void   broadcast_odom_state();     // map座標系とodom座標系の関係を報告
     void   localize();                 // 自己位置推定

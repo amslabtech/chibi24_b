@@ -1,14 +1,16 @@
 #include "b_localizer/b_particle.hpp"
 
 // デフォルトコンストラクタ
-Particle::Particle() : pose_(0.0, 0.0, 0.0)
+Particle::Particle()
 {
+    pose_   = Pose(0.0,0.0,0.0);
     weight_ = 0.0;
 }
 
 // コンストラクタ
-Particle::Particle(const double x, const double y, const double yaw, const double weight) : pose_(x, y, yaw)
+Particle::Particle(const double x, const double y, const double yaw, const double weight)
 {
+    pose_   = Pose(x,y,yaw);
     weight_ = weight;
 }
 

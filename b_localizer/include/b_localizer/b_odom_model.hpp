@@ -1,5 +1,5 @@
-#ifndef ODOM_MODEL_HPP
-#define ODOM_MODEL_HPP
+#ifndef B_ODOM_MODEL_HPP
+#define B_ODOM_MODEL_HPP
 
 #include <random>
 
