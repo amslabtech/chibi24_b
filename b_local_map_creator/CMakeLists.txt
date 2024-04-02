@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(chibi24_b)
+project(b_local_map_creator)
 
 # find dependencies
 find_package(ament_cmake_auto REQUIRED)
