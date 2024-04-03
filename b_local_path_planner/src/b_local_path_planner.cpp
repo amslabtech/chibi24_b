@@ -65,6 +65,7 @@ void DWAPlanner::local_goal_callback(const geometry_msgs::msg::PointStamped::Sha
         // lookupTransform("変換のベースとなる座標系","変更したい対象の座標系",変更したい時間(過去データを扱う場合は注意が必要))
         transformStamped = tfBuffer_.lookupTransform("base_link", "map", this->get_clock()->now()); //座標系の変換
         flag_local_goal_ = true;
+        printf("local_goal_callback\n");
     }
     catch (tf2::TransformException &ex) //エラー
     {
@@ -79,6 +80,7 @@ void DWAPlanner::obs_pose_callback(const geometry_msgs::msg::PoseArray::SharedPt
 {
     obs_pose_ = *msg;
     flag_obs_pose_ = true;
+    printf("obs_pose_callback\n");
 }
 
 bool DWAPlanner::is_goal_reached() //情報が適切にsubscribeされているか判定する
@@ -128,6 +130,7 @@ void DWAPlanner::roomba_ctl(double vel, double yawrate) //roomba制御
     roomba_ctl_msg_.cntl.angular.z = yawrate;
 
     cmd_speed_pub_->publish(roomba_ctl_msg_);
+    printf("roomba_ctl\n");
 }
 
 std::vector<double> DWAPlanner::calc_input() //計算(速度と回転角速度をinputで返す)
@@ -176,10 +179,12 @@ std::vector<double> DWAPlanner::calc_input() //計算(速度と回転角速度�
     {
         if (i == max_score_index)
         {
+            printf("optimal\n");
             visualize_trajectory(trajectory_list[i], optimal_path_pub_, this->now()); //最適ルート
         }
         else
         {
+            printf("predict\n");
             visualize_trajectory(trajectory_list[i], predict_path_pub_, this->now()); //想定されるルート
         }
     }

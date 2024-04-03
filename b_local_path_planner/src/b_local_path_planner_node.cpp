@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 		node->process();
 		rclcpp::spin_some(node);
 	    loop_rate.sleep();
-        RCLCPP_ERROR(node->get_logger(), "Error Message");
+        //RCLCPP_ERROR(node->get_logger(), "Error Message");
 	}
 	rclcpp::shutdown();
 	return 0;
