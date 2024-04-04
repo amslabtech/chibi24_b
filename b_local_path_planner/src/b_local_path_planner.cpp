@@ -43,7 +43,7 @@ DWAPlanner::DWAPlanner() : Node("b_local_path_planner"),tfBuffer_(this->get_cloc
     this->get_parameter("search_range", search_range_);
 
     // Subscriber
-    local_goal_sub_ = this->create_subscription<geometry_msgs::msg::PointStamped>("/local/goal", rclcpp::QoS(1).reliable(), std::bind(&DWAPlanner::local_goal_callback, this, std::placeholders::_1));
+    local_goal_sub_ = this->create_subscription<geometry_msgs::msg::PointStamped>("/local_goal", rclcpp::QoS(1).reliable(), std::bind(&DWAPlanner::local_goal_callback, this, std::placeholders::_1));
     obs_pose_sub_ = this->create_subscription<geometry_msgs::msg::PoseArray>("/obstacle/pose", rclcpp::QoS(1).reliable(), std::bind(&DWAPlanner::obs_pose_callback, this, std::placeholders::_1));
 
     // Publisher
@@ -51,21 +51,29 @@ DWAPlanner::DWAPlanner() : Node("b_local_path_planner"),tfBuffer_(this->get_cloc
     predict_path_pub_ = this->create_publisher<nav_msgs::msg::Path>("/predict/path", rclcpp::QoS(1).reliable());
     optimal_path_pub_ = this->create_publisher<nav_msgs::msg::Path>("/optimal/path", rclcpp::QoS(1).reliable());
     local_path_pub_ = this->create_publisher<nav_msgs::msg::Path>("local_path_topic",10);
+
+    predict_path_.header.frame_id ="base_link";
+    optimal_path_.header.frame_id ="base_link";
+
 }
 
 void DWAPlanner::local_goal_callback(const geometry_msgs::msg::PointStamped::SharedPtr msg) //local goalを受け取る
 {
+    printf("local_goal_callback\n");
     geometry_msgs::msg::TransformStamped transformStamped;
     try
     {
         //tf2_ros::Buffer tfBuffer_;
         //tfBuffer_ = tf2_ros::Buffer;
         //geometry_msgs::msg::TransformStamped transformStamped;
-        
         // lookupTransform("変換のベースとなる座標系","変更したい対象の座標系",変更したい時間(過去データを扱う場合は注意が必要))
-        transformStamped = tfBuffer_.lookupTransform("base_link", "map", this->get_clock()->now()); //座標系の変換
+        printf("1\n");
+        tfBuffer_.setUsingDedicatedThread(true);
+        printf("2\n");
+        transformStamped = tfBuffer_.lookupTransform("base_link", "map", rclcpp::Time(0)); //座標系の変換
+        printf("3\n");
         flag_local_goal_ = true;
-        printf("local_goal_callback\n");
+        printf("transform\n");
     }
     catch (tf2::TransformException &ex) //エラー
     {
@@ -175,17 +183,20 @@ std::vector<double> DWAPlanner::calc_input() //計算(速度と回転角速度�
     roomba_.yawrate = input[1];
 
     //rclcpp::Time now = rclcpp::Time::now();
+    rclcpp::Clock ros_clock(rcl_clock_type_t RCL_ROS_TIME);
+    rclcpp::Time now = get_clock()->now();
+    //rclcpp::Time now = ros_clock.now();
     for (int i = 0; i < trajectory_list.size(); i++)
     {
         if (i == max_score_index)
         {
             printf("optimal\n");
-            visualize_trajectory(trajectory_list[i], optimal_path_pub_, this->now()); //最適ルート
+            visualize_trajectory(trajectory_list[i], optimal_path_pub_, now); //最適ルート
         }
         else
         {
             printf("predict\n");
-            visualize_trajectory(trajectory_list[i], predict_path_pub_, this->now()); //想定されるルート
+            visualize_trajectory(trajectory_list[i], predict_path_pub_, now); //想定されるルート
         }
     }
 

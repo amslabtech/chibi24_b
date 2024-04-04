@@ -2,8 +2,8 @@
 #define B_LOCAL_PATH_PLANNER_HPP
 
 #include <rclcpp/rclcpp.hpp>
-#include "tf2_ros/buffer.h"
-#include "tf2/transform_datatypes.h"
+#include <tf2_ros/buffer.h>
+#include <tf2/transform_datatypes.h>
 //#include "tf2/convert.h"
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 #include <functional>
@@ -13,8 +13,8 @@
 #include <geometry_msgs/msg/pose_stamped.hpp>
 #include <geometry_msgs/msg/pose_array.hpp>
 #include <nav_msgs/msg/path.hpp>
-#include "tf2_ros/transform_listener.h"
-#include "tf2/utils.h"
+#include <tf2_ros/transform_listener.h>
+#include <tf2/utils.h>
 #include "roomba_500driver_meiji/msg/roomba_ctrl.hpp"
 
 struct State
@@ -106,11 +106,13 @@ class DWAPlanner : public rclcpp::Node
         //std::shared_ptr<tf2_ros::Buffer> tfBuffer_;
         //std::shared_ptr<geometry_msgs::msg::TransformStamped> transformStamped;
         tf2_ros::Buffer tfBuffer_;
+        //tfBuffer_.setUsingDedicatedThread(true);
+
 
         roomba_500driver_meiji::msg::RoombaCtrl roomba_ctl_msg_;
-        nav_msgs::msg::Path predict_path;
-        nav_msgs::msg::Path optimal_path;
-        nav_msgs::msg::Path local_path;
+        nav_msgs::msg::Path predict_path_;
+        nav_msgs::msg::Path optimal_path_;
+        nav_msgs::msg::Path local_path_;
 
 
         rclcpp::Clock ros_clock(rcl_clock_type_t RCL_ROS_TIME);
