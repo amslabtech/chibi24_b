@@ -1,10 +1,18 @@
-#include "local_goal_creator/local_goal_creator.h"
+#include "local_goal_creator/local_goal_creator.hpp"
 
 int main(int argc, char* argv[])
 {
-    ros::init(argc, argv, "local_goal_creator");
-    LocalGoalCreator localgoalcreator;
-    localgoalcreator.process();
+
+    rclcpp::init(argc, argv); // ノードの初期化
+    auto node = std::make_shared<LocalGoalCreator>();
+    rclcpp::Rate loop_rate(node->getOdomFreq());
+    
+
+    while(rclcpp::ok()){
+        node->process();
+        rclcpp::spin_some(node);   // コールバック関数の実行
+        loop_rate.sleep(); // 周期が終わるまで待つ
+    }
 
     return 0;
 }
