@@ -1,6 +1,6 @@
 #include "b_local_path_planner/b_local_path_planner.hpp"
 
-DWAPlanner::DWAPlanner() : Node("b_local_path_planner"),tfBuffer_(this->get_clock())
+DWAPlanner::DWAPlanner() : Node("b_local_path_planner"), tfBuffer_(this->get_clock()),tfListener_(tfBuffer_)
 {
     // パラメータ宣言
     this->declare_parameter("hz", 50);
@@ -52,8 +52,12 @@ DWAPlanner::DWAPlanner() : Node("b_local_path_planner"),tfBuffer_(this->get_cloc
     optimal_path_pub_ = this->create_publisher<nav_msgs::msg::Path>("/optimal/path", rclcpp::QoS(1).reliable());
     local_path_pub_ = this->create_publisher<nav_msgs::msg::Path>("local_path_topic",10);
 
-    predict_path_.header.frame_id ="base_link";
-    optimal_path_.header.frame_id ="base_link";
+    //tfBuffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
+    //tfListener_ = std::make_shared<tf2_ros::TransformListener>(*tfBuffer_);
+    // 定期的にtf変換を取得するタイマーを設定
+    //timer_ = this->create_wall_timer(0.5s,std::bind(&SecondChallenge::timer_callback,this));
+    //predict_path_.header.frame_id ="base_link";
+    //optimal_path_.header.frame_id ="base_link";
 
 }
 
@@ -67,10 +71,14 @@ void DWAPlanner::local_goal_callback(const geometry_msgs::msg::PointStamped::Sha
         //tfBuffer_ = tf2_ros::Buffer;
         //geometry_msgs::msg::TransformStamped transformStamped;
         // lookupTransform("変換のベースとなる座標系","変更したい対象の座標系",変更したい時間(過去データを扱う場合は注意が必要))
+        //broadcast_dynamic_tf();
         printf("1\n");
-        tfBuffer_.setUsingDedicatedThread(true);
+        //tfBuffer_.setUsingDedicatedThread(true);
         printf("2\n");
-        transformStamped = tfBuffer_.lookupTransform("base_link", "map", rclcpp::Time(0)); //座標系の変換
+        transformStamped = tfBuffer_.lookupTransform("base_link", "map", tf2::TimePointZero); //座標系の変換 
+        printf("2.5\n");
+        // 取得した変換情報を表示
+        RCLCPP_INFO(this->get_logger(), "Transform: [%f, %f, %f]", transformStamped.transform.translation.x, transformStamped.transform.translation.y, transformStamped.transform.translation.z);
         printf("3\n");
         flag_local_goal_ = true;
         printf("transform\n");
@@ -81,8 +89,34 @@ void DWAPlanner::local_goal_callback(const geometry_msgs::msg::PointStamped::Sha
         flag_local_goal_ = false;
         return;
     }
+    //auto& trans = transformStamped.transform.translation;
+    //ROS_INFO("world->dynamic_tf: %f %f %f", trans.x, trans.y, trans.z);
+
+    //geometry_msgs::msg::Pose object_d, object_w;
+    //object_d.position.z = 1.0;
+    //object_d.orientation.w = 1.0;
     tf2::doTransform(*msg, local_goal_, transformStamped); //座標変換してsubscribe
+    //ROS_INFO("object_w x:%f, y:%f, z:%f", object_w.position.x, object_w.position.y, object_w.position.z);
 }
+/*
+void broadcast_dynamic_tf(geometry_msgs::msg::PointStamped::SharedPtr msg)
+{
+    geometry_msgs::TransformStamped transformStamped;
+    transformStamped.header.stamp = get_clock()->now();
+    transformStamped.header.frame_id = "base_link";
+    transformStamped.child_frame_id = "map";
+    transformStamped.transform.translation.x = msg.x
+    transformStamped.transform.translation.y = msg.y
+    transformStamped.transform.translation.z = 0.0;
+    tf2::Quaternion q;
+    q.setRPY(0, 0, 0.0);
+    transformStamped.transform.rotation.x = q.x();
+    transformStamped.transform.rotation.y = q.y();
+    transformStamped.transform.rotation.z = q.z();
+    transformStamped.transform.rotation.w = q.w();
+    dynamic_br_.sendTransform(transformStamped);
+}
+*/
 
 void DWAPlanner::obs_pose_callback(const geometry_msgs::msg::PoseArray::SharedPtr msg) //障害物情報を受け取る
 {
@@ -115,7 +149,7 @@ bool DWAPlanner::is_goal_reached() //情報が適切にsubscribeされている�
 void DWAPlanner::process() //全体の処理(主要なループ)
 {
     // ros::Rate loop_rate(hz_);
-    // tf2_ros::TransformListener tfListener(tfBuffer_);
+    //tf2_ros::TransformListener tfListener(tfBuffer_);
 
     if (is_goal_reached())
     {
@@ -334,24 +368,26 @@ double DWAPlanner::calc_distance_eval(const std::vector<State> &trajectory) //�
 
 void DWAPlanner::visualize_trajectory(const std::vector<State> &trajectory, const rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr& local_path_pub_,rclcpp::Time now) //軌跡の表示
 {
-    nav_msgs::msg::Path local_path;
-    local_path.header.stamp = now;
-    local_path.header.frame_id = "base_link";
+    printf("a\n");
+    //nav_msgs::msg::Path local_path;
+    local_path_.header.stamp = now;
+    local_path_.header.frame_id = "base_link";
 
     geometry_msgs::msg::PoseStamped pose;
     pose.header.stamp = now;
     pose.header.frame_id = "base_link";
-
+    printf("b\n");
     for (const auto &state : trajectory)
     {
         pose.pose.position.x = state.x;
         pose.pose.position.y = state.y;
         // std::cout << "x: " << state.x << std::endl;
         // std::cout << "y: " << state.y << std::endl;
-        local_path.poses.push_back(pose);
+        printf("c\n");
+        local_path_.poses.push_back(pose);
     }
-
-    local_path_pub_->publish(local_path);
+    printf("d\n");
+    local_path_pub_->publish(local_path_);
 }
 
 /*

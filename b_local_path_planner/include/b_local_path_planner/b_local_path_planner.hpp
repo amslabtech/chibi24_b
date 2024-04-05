@@ -4,6 +4,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <tf2_ros/buffer.h>
 #include <tf2/transform_datatypes.h>
+#include <tf2/LinearMath/Transform.h>
 //#include "tf2/convert.h"
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 #include <functional>
@@ -13,8 +14,12 @@
 #include <geometry_msgs/msg/pose_stamped.hpp>
 #include <geometry_msgs/msg/pose_array.hpp>
 #include <nav_msgs/msg/path.hpp>
+#include <geometry_msgs/msg/pose.hpp>
 #include <tf2_ros/transform_listener.h>
+#include <tf2_ros/transform_broadcaster.h>
+#include <tf2/LinearMath/Quaternion.h>
 #include <tf2/utils.h>
+
 #include "roomba_500driver_meiji/msg/roomba_ctrl.hpp"
 
 struct State
@@ -39,7 +44,7 @@ class DWAPlanner : public rclcpp::Node
     public:
         DWAPlanner();
         void process();
-        //void debager();
+        void debager();
 
     private:
         void local_goal_callback(const geometry_msgs::msg::PointStamped::SharedPtr msg);
@@ -58,6 +63,7 @@ class DWAPlanner : public rclcpp::Node
 
         bool is_goal_reached();
         void calc_dynamic_window();
+        void broadcast_dynamic_tf();
         std::vector<double> calc_input();
 
         int hz_;
@@ -105,7 +111,11 @@ class DWAPlanner : public rclcpp::Node
 
         //std::shared_ptr<tf2_ros::Buffer> tfBuffer_;
         //std::shared_ptr<geometry_msgs::msg::TransformStamped> transformStamped;
+        //tf2_ros::TransformBroadcaster dynamic_br_;
         tf2_ros::Buffer tfBuffer_;
+        tf2_ros::TransformListener tfListener_; 
+        //std::shared_ptr<tf2_ros::Buffer> tfBuffer_;
+        //std::shared_ptr<tf2_ros::TransformListener> tfListener_;
         //tfBuffer_.setUsingDedicatedThread(true);
 
 
@@ -116,7 +126,7 @@ class DWAPlanner : public rclcpp::Node
 
 
         rclcpp::Clock ros_clock(rcl_clock_type_t RCL_ROS_TIME);
-
+        //rclcpp::TimerBase::SharedPtr timer_;
 };
 
 #endif // LOCAL_PATH_PLANNER_H
