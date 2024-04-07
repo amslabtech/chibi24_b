@@ -23,3 +23,5 @@ robot_radius: 0.25
 radius_margin: 0.1
 
 search_range: 0.95
+
+robot_frame: "base_link"

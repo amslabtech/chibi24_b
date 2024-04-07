@@ -112,8 +112,10 @@ class DWAPlanner : public rclcpp::Node
         //std::shared_ptr<tf2_ros::Buffer> tfBuffer_;
         //std::shared_ptr<geometry_msgs::msg::TransformStamped> transformStamped;
         //tf2_ros::TransformBroadcaster dynamic_br_;
-        tf2_ros::Buffer tfBuffer_;
-        tf2_ros::TransformListener tfListener_; 
+        //tf2_ros::Buffer tfBuffer_;
+        //tf2_ros::TransformListener tfListener_; 
+        std::unique_ptr<tf2_ros::Buffer> tfBuffer_;
+        std::shared_ptr<tf2_ros::TransformListener> tfListener_;
         //std::shared_ptr<tf2_ros::Buffer> tfBuffer_;
         //std::shared_ptr<tf2_ros::TransformListener> tfListener_;
         //tfBuffer_.setUsingDedicatedThread(true);
@@ -125,7 +127,7 @@ class DWAPlanner : public rclcpp::Node
         nav_msgs::msg::Path local_path_;
 
 
-        rclcpp::Clock ros_clock(rcl_clock_type_t RCL_ROS_TIME);
+        //rclcpp::Clock ros_clock(rcl_clock_type_t RCL_ROS_TIME);
         //rclcpp::TimerBase::SharedPtr timer_;
 };
 
