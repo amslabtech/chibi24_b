@@ -354,6 +354,7 @@ double DWAPlanner::calc_distance_eval(const std::vector<State> &trajectory) //�
 
 void DWAPlanner::visualize_trajectory(const std::vector<State> &trajectory, const rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr& local_path_pub_,rclcpp::Time now) //軌跡の表示
 {
+
     printf("a\n");
     //nav_msgs::msg::Path local_path;
     local_path_.header.stamp = now;
@@ -363,6 +364,10 @@ void DWAPlanner::visualize_trajectory(const std::vector<State> &trajectory, cons
     pose.header.stamp = now;
     pose.header.frame_id = "base_link";
     printf("b\n");
+
+    //local_path_.poses.clear();
+    //pose.poses.clear();
+
     for (const auto &state : trajectory)
     {
         pose.pose.position.x = state.x;
