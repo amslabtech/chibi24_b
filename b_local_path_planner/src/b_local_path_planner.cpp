@@ -4,8 +4,8 @@ DWAPlanner::DWAPlanner() : Node("b_local_path_planner")
 {
     // パラメータ宣言
     this->declare_parameter("hz", 50);
-    this->declare_parameter("dt", 0.1);
-    this->declare_parameter("goal_tolerance", 0.5);
+    this->declare_parameter("dt", 0.1);  //変更の余地アリ
+    this->declare_parameter("goal_tolerance", 0.3); //変更の余地あり
     this->declare_parameter("max_vel", 0.45);
     this->declare_parameter("min_vel", 0.0);
     this->declare_parameter("max_yawrate", 1.0);
@@ -14,13 +14,13 @@ DWAPlanner::DWAPlanner() : Node("b_local_path_planner")
     this->declare_parameter("max_dyawrate", 1000.0);
     this->declare_parameter("v_reso", 0.05);
     this->declare_parameter("y_reso", 0.1);
-    this->declare_parameter("predict_time", 4.0);
+    this->declare_parameter("predict_time", 2.0); //変更の余地あり
     this->declare_parameter("heading_cost_gain", 1.0);
     this->declare_parameter("velocity_cost_gain", 1.0);
     this->declare_parameter("distance_cost_gain", 1.0);
-    this->declare_parameter("robot_radius", 0.25);
-    this->declare_parameter("radius_margin", 0.1);
-    this->declare_parameter("search_range", 0.95);
+    this->declare_parameter("robot_radius", 0.25); //いらない
+    this->declare_parameter("radius_margin", 0.1); //いらない
+    this->declare_parameter("search_range", 0.95); //変更の余地あり
 
     // パラメータの取得
     this->get_parameter("hz", hz_);
@@ -39,9 +39,29 @@ DWAPlanner::DWAPlanner() : Node("b_local_path_planner")
     this->get_parameter("velocity_cost_gain", velocity_cost_gain_);
     this->get_parameter("distance_cost_gain", distance_cost_gain_);
     this->get_parameter("robot_radius", robot_radius_);
-    this->get_parameter("radius_margin", radius_margin_);
+    this->get_parameter("radius_margin",radius_margin_);
     this->get_parameter("search_range", search_range_);
-    this->declare_parameter<std::string>("robot_frame","base_link");
+    //this->declare_parameter<std::string>("robot_frame","base_link");
+    printf("hz =%d\n",hz_);
+    printf("dt =%f\n",dt_);
+    printf("predict_time =%f\n",predict_time_);
+    printf("goal_tolerance =%f\n",goal_tolerance_);
+    printf("max_vel =%f\n",max_vel_);
+    printf("min_vel =%f\n",min_vel_);
+    printf("max_yawrate =%f\n",max_yawrate_);
+    printf("min_yawrate =%f\n",min_yawrate_);
+    printf("max_accel =%f\n",max_accel_);
+    printf("max_dyawrate =%f\n",max_dyawrate_);
+    printf("v_reso =%f\n",v_reso_);
+    printf("y_reso =%f\n",y_reso_);
+    printf("heading_cost_gain =%f\n",heading_cost_gain_);
+    printf("velocity_cost_gain =%f\n",velocity_cost_gain_);
+    printf("distance_cost_gain =%f\n",distance_cost_gain_);
+    printf("serch_range =%f\n",search_range_);
+    
+
+
+
 
     // Subscriber
     local_goal_sub_ = this->create_subscription<geometry_msgs::msg::PointStamped>("/local_goal", rclcpp::QoS(1).reliable(), std::bind(&DWAPlanner::local_goal_callback, this, std::placeholders::_1));
@@ -51,16 +71,10 @@ DWAPlanner::DWAPlanner() : Node("b_local_path_planner")
     cmd_speed_pub_ = this->create_publisher<roomba_500driver_meiji::msg::RoombaCtrl>("/roomba/control", rclcpp::QoS(1).reliable());
     predict_path_pub_ = this->create_publisher<nav_msgs::msg::Path>("/predict/path", rclcpp::QoS(1).reliable());
     optimal_path_pub_ = this->create_publisher<nav_msgs::msg::Path>("/optimal/path", rclcpp::QoS(1).reliable());
-    local_path_pub_ = this->create_publisher<nav_msgs::msg::Path>("local_path_topic",10);
 
 
-     // Create a TransformListener
-    //tf2_ros::Buffer tfBuffer_(this->get_clock());
-    //tf2_ros::TransformListener tfListener_(tfBuffer_);
     tfBuffer_ = std::make_unique<tf2_ros::Buffer>(this->get_clock());
     tfListener_ = std::make_shared<tf2_ros::TransformListener>(*tfBuffer_);
-    // 定期的にtf変換を取得するタイマーを設定
-    //timer_ = this->create_wall_timer(0.5s,std::bind(&SecondChallenge::timer_callback,this));
     //predict_path_.header.frame_id ="base_link";
     //optimal_path_.header.frame_id ="base_link";
 
@@ -72,19 +86,11 @@ void DWAPlanner::local_goal_callback(const geometry_msgs::msg::PointStamped::Sha
     geometry_msgs::msg::TransformStamped transformStamped;
     try
     {
-        //tf2_ros::Buffer tfBuffer_;
-        //tfBuffer_ = tf2_ros::Buffer;
-        //geometry_msgs::msg::TransformStamped transformStamped;
-        // lookupTransform("変換のベースとなる座標系","変更したい対象の座標系",変更したい時間(過去データを扱う場合は注意が必要))
-        //broadcast_dynamic_tf();
-        printf("1\n");
-        //tfBuffer_.setUsingDedicatedThread(true);
-        printf("2\n");
-        transformStamped = tfBuffer_->lookupTransform(this->get_parameter("robot_frame").as_string(),"map", tf2::TimePointZero); //座標系の変換 
-        printf("3\n");
+        //lookupTransform("変換のベースとなる座標系","変更したい対象の座標系",変更したい時間(過去データを扱う場合は注意が必要))
+        //transformStamped = tfBuffer_->lookupTransform(this->get_parameter("robot_frame").as_string(),"map", tf2::TimePointZero); //座標系の変換  
+        transformStamped = tfBuffer_->lookupTransform("base_link","map", tf2::TimePointZero); //座標系の変換 
         // 取得した変換情報を表示
         RCLCPP_INFO(this->get_logger(), "Transform: [%f, %f, %f]", transformStamped.transform.translation.x, transformStamped.transform.translation.y, transformStamped.transform.translation.z);
-        printf("4\n");
         flag_local_goal_ = true;
         printf("transform\n");
     }
@@ -95,8 +101,7 @@ void DWAPlanner::local_goal_callback(const geometry_msgs::msg::PointStamped::Sha
         return;
     }
 
-    tf2::doTransform(*msg, local_goal_, transformStamped); //座標変換してsubscribe
-    //ROS_INFO("object_w x:%f, y:%f, z:%f", object_w.position.x, object_w.position.y, object_w.position.z);
+    tf2::doTransform(*msg, local_goal_, transformStamped); //do座標変換
 }
 
 
@@ -130,8 +135,6 @@ bool DWAPlanner::is_goal_reached() //情報が適切にsubscribeされている�
 
 void DWAPlanner::process() //全体の処理(主要なループ)
 {
-    // ros::Rate loop_rate(hz_);
-    //tf2_ros::TransformListener tfListener(tfBuffer_);
 
     if (is_goal_reached())
     {
@@ -149,6 +152,7 @@ void DWAPlanner::process() //全体の処理(主要なループ)
 
 void DWAPlanner::roomba_ctl(double vel, double yawrate) //roomba制御
 {
+
     roomba_ctl_msg_.mode = 11;
     roomba_ctl_msg_.cntl.linear.x = vel;
     roomba_ctl_msg_.cntl.angular.z = yawrate;
@@ -171,7 +175,6 @@ std::vector<double> DWAPlanner::calc_input() //計算(速度と回転角速度�
     {
         for (double yawrate = dw_.min_yawrate; yawrate <= dw_.max_yawrate; yawrate += y_reso_)
         {
-            // ROS_WARN_STREAM("velocity: " << velocity);   jkbviyccghvigvvuvycytcytcycfg vgykvhv!!!!!!!!!!!!!!!!!
             //RCLCPP_WARN_STREAM(rclcpp::get_logger("b_local_path_planner"),"max_yawrate: " << dw_.max_yawrate);
             //RCLCPP_WARN_STREAM(rclcpp::get_logger("b_local_path_planner"),"yawrate: " << yawrate);
             const std::vector<State> trajectory = calc_trajectory(velocity, yawrate);//軌跡の計算
@@ -199,9 +202,9 @@ std::vector<double> DWAPlanner::calc_input() //計算(速度と回転角速度�
     roomba_.yawrate = input[1];
 
     //rclcpp::Time now = rclcpp::Time::now();
+    //rclcpp::Time now = ros_clock.now();
     rclcpp::Clock ros_clock(rcl_clock_type_t RCL_ROS_TIME);
     rclcpp::Time now = get_clock()->now();
-    //rclcpp::Time now = ros_clock.now();
     for (int i = 0; i < trajectory_list.size(); i++)
     {
         if (i == max_score_index)
@@ -209,13 +212,11 @@ std::vector<double> DWAPlanner::calc_input() //計算(速度と回転角速度�
             printf("optimal\n");
             visualize_trajectory(trajectory_list[i], optimal_path_pub_, now); //最適ルート
         }
-        /*
         else
         {
             printf("predict\n");
             visualize_trajectory(trajectory_list[i], predict_path_pub_, now); //想定されるルート
         }
-        */
     }
 
     return input;
@@ -355,30 +356,24 @@ double DWAPlanner::calc_distance_eval(const std::vector<State> &trajectory) //�
 void DWAPlanner::visualize_trajectory(const std::vector<State> &trajectory, const rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr& local_path_pub_,rclcpp::Time now) //軌跡の表示
 {
 
-    printf("a\n");
-    //nav_msgs::msg::Path local_path;
-    local_path_.header.stamp = now;
-    local_path_.header.frame_id = "base_link";
+    nav_msgs::msg::Path local_path;
+    local_path.header.stamp = now;
+    local_path.header.frame_id = "base_link";
 
     geometry_msgs::msg::PoseStamped pose;
     pose.header.stamp = now;
     pose.header.frame_id = "base_link";
-    printf("b\n");
 
-    //local_path_.poses.clear();
-    //pose.poses.clear();
 
     for (const auto &state : trajectory)
     {
         pose.pose.position.x = state.x;
         pose.pose.position.y = state.y;
-        // std::cout << "x: " << state.x << std::endl;
-        // std::cout << "y: " << state.y << std::endl;
-        //printf("c\n");
-        local_path_.poses.push_back(pose);
+        std::cout << "x: " << state.x << std::endl;
+        std::cout << "y: " << state.y << std::endl;
+        local_path.poses.push_back(pose);
     }
-    printf("d\n");
-    local_path_pub_->publish(local_path_);
+    local_path_pub_->publish(local_path);
 }
 
 /*

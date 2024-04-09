@@ -3,21 +3,19 @@
 
 #include <rclcpp/rclcpp.hpp>
 #include <tf2_ros/buffer.h>
-#include <tf2/transform_datatypes.h>
-#include <tf2/LinearMath/Transform.h>
-//#include "tf2/convert.h"
+//#include <tf2/transform_datatypes.h>//
+//#include <tf2/LinearMath/Transform.h>//
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 #include <functional>
 #include <memory>
 #include <geometry_msgs/msg/transform_stamped.hpp>
 #include <geometry_msgs/msg/point_stamped.hpp>
-#include <geometry_msgs/msg/pose_stamped.hpp>
 #include <geometry_msgs/msg/pose_array.hpp>
 #include <nav_msgs/msg/path.hpp>
-#include <geometry_msgs/msg/pose.hpp>
+//#include <geometry_msgs/msg/pose.hpp> //
 #include <tf2_ros/transform_listener.h>
-#include <tf2_ros/transform_broadcaster.h>
-#include <tf2/LinearMath/Quaternion.h>
+//#include <tf2_ros/transform_broadcaster.h> //
+//#include <tf2/LinearMath/Quaternion.h>//
 #include <tf2/utils.h>
 
 #include "roomba_500driver_meiji/msg/roomba_ctrl.hpp"
@@ -102,16 +100,11 @@ class DWAPlanner : public rclcpp::Node
         //publisher
         rclcpp::Publisher<roomba_500driver_meiji::msg::RoombaCtrl>::SharedPtr cmd_speed_pub_; //roomba制御
         rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr predict_path_pub_; //予想されるルート
-        rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr optimal_path_pub_; //最適ルート
-        rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr local_path_pub_;             
-        
+        rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr optimal_path_pub_; //最適ルート           
 
         geometry_msgs::msg::PointStamped local_goal_;
         geometry_msgs::msg::PoseArray obs_pose_;
 
-        //std::shared_ptr<tf2_ros::Buffer> tfBuffer_;
-        //std::shared_ptr<geometry_msgs::msg::TransformStamped> transformStamped;
-        //tf2_ros::TransformBroadcaster dynamic_br_;
         //tf2_ros::Buffer tfBuffer_;
         //tf2_ros::TransformListener tfListener_; 
         std::unique_ptr<tf2_ros::Buffer> tfBuffer_;
@@ -124,8 +117,6 @@ class DWAPlanner : public rclcpp::Node
         roomba_500driver_meiji::msg::RoombaCtrl roomba_ctl_msg_;
         nav_msgs::msg::Path predict_path_;
         nav_msgs::msg::Path optimal_path_;
-        nav_msgs::msg::Path local_path_;
-
 
         //rclcpp::Clock ros_clock(rcl_clock_type_t RCL_ROS_TIME);
         //rclcpp::TimerBase::SharedPtr timer_;
