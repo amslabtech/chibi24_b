@@ -4,8 +4,8 @@ LocalGoalCreator::LocalGoalCreator() : Node("LocalGoalCreator")
 {
     this  -> declare_parameter("hz", 10);
     this  -> declare_parameter("index_step", 5);
-    this  -> declare_parameter("target_distance", 50.0);
-    this  -> declare_parameter("goal_index", 1.7);
+    this  -> declare_parameter("target_distance", 1.7);
+    this  -> declare_parameter("goal_index", 50);
 
     this  -> get_parameter("hz", hz_);
     this  -> get_parameter("index_step", index_step_);

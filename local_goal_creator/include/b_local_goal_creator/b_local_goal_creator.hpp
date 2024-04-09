@@ -21,7 +21,7 @@ private:
 
     int hz_;
     int index_step_;
-    double goal_index_;
+    int goal_index_;
     double taeget_distance_;
     bool is_path_ = false;
 
