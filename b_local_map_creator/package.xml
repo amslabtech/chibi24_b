@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>b_local_map_creator</name>
+  <version>0.0.0</version>
+  <description>The b_local_map_creator package</description>
+  <maintainer email="amsl@todo.todo">user</maintainer>
+  <license>todo</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>ament_cmake</depend>
+  <depend>rclcpp</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
