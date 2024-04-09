@@ -19,7 +19,7 @@ LocalGoalCreator::LocalGoalCreator() : Node("LocalGoalCreator")
     std::bind(&LocalGoalCreator::pathCallback, this, std::placeholders::_1));
 
     pose_sub_   = this->create_subscription<geometry_msgs::msg::PoseStamped>(
-    "/estimate_pose", rclcpp::QoS(1).reliable(),
+    "/estimated_pose", rclcpp::QoS(1).reliable(),
     std::bind(&LocalGoalCreator::poseCallback, this, std::placeholders::_1));
 
     local_goal_pub_ = this->create_publisher<geometry_msgs::msg::PointStamped>(
