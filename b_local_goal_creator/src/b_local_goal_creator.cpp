@@ -10,7 +10,7 @@ LocalGoalCreator::LocalGoalCreator() : Node("LocalGoalCreator")
     this  -> get_parameter("hz", hz_);
     this  -> get_parameter("index_step", index_step_);
     this  -> get_parameter("target_distance", taeget_distance_);
-    this  -> get_parameter("goal_index", goal_index_);
+    this  -> get_parameter("goal_index", goal_index_); 
 
     goal_.header.frame_id = "map";
 
