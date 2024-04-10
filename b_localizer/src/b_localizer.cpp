@@ -102,13 +102,13 @@ void EMCL::map_callback(const nav_msgs::msg::OccupancyGrid::SharedPtr msg)
 {
     map_      = *msg;
     flag_map_ = true;
-    printf("m_c\n");
+    //printf("m_c\n");
 }
 
 // odometryのコールバック関数
 void EMCL::odom_callback(const nav_msgs::msg::Odometry::SharedPtr msg)
 {
-    printf("o_c\n");
+    //printf("o_c\n");
     prev_odom_ = last_odom_;
     last_odom_ = *msg;
     flag_odom_ = true;
@@ -126,7 +126,7 @@ void EMCL::odom_callback(const nav_msgs::msg::Odometry::SharedPtr msg)
 // laserのコールバック関数
 void EMCL::laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
 {
-    printf("l_c\n");
+    //printf("l_c\n");
     laser_      = *msg;
     flag_laser_ = true;
 }
@@ -136,25 +136,25 @@ int EMCL::getOdomFreq() { return hz_; }
 // 唯一，main文で実行する関数
 void EMCL::process()
 {             // パーティクルの初期化
-    printf("plocess_0\n");
+    //printf("plocess_0\n");
     if(flag_map_ and flag_odom_ and flag_laser_)
     {
-        printf("plocess_1\n");
+        //printf("plocess_1\n");
         broadcast_odom_state(); // map座標系とodom座標系の関係を報告
         if(flag_move_)
         {
             localize(); // 自己位置推定
-            printf("localize\n");
+            //printf("localize\n");
         }
         else
         {
             publish_estimated_pose(); // 推定位置のパブリッシュ
             publish_particles();      // パーティクルクラウドのパブリッシュ
-            printf("publish_\n");
+            //printf("publish_\n");
         }
     
     }
-    printf("process_3\n");
+    //printf("process_3\n");
 }
 
 // パーティクル，推定位置の初期化
@@ -164,7 +164,7 @@ void EMCL::initialize()
     estimated_pose_.set(init_x_, init_y_, init_yaw_);
 
     Particle particle;
-    printf("!0\n");
+    //printf("!0\n");
 
     for(int i=0; i<particle_num_; i++)
     {
@@ -175,7 +175,7 @@ void EMCL::initialize()
             const double yaw = norm_rv(init_yaw_, init_yaw_dev_);
             particle.pose_.set(x, y, yaw);
             particle.pose_.normalize_angle();
-            printf("1\n");
+            //printf("1\n");
         }
         else
         {
@@ -184,20 +184,20 @@ void EMCL::initialize()
             const double yaw = init_yaw_;
             particle.pose_.set(x, y, yaw);
             particle.pose_.normalize_angle();
-            printf("2\n");
+            //printf("2\n");
         }
         particles_.push_back(particle);
     }
 
     reset_weight(); // 重みの初期化
-    printf("initialize\n");
+    //printf("initialize\n");
 }
 
 // ランダム変数生成関数（正規分布）
 double EMCL::norm_rv(const double mean, const double stddev)
 {
     std::normal_distribution<> norm_dist(mean, stddev);
-    printf("norm_rv");
+    //printf("norm_rv");
     return norm_dist(engine_);
 }
 
@@ -206,9 +206,9 @@ void EMCL::reset_weight()
 {
     for(auto& p : particles_){
         p.set_weight(1.0/particles_.size());
-        printf("\n");
+        //printf("\n");
     }
-    printf("reset_weight\n");
+    //printf("reset_weight\n");
 }
 
 // map座標系とodom座標系の関係を報告
@@ -262,7 +262,7 @@ void EMCL::broadcast_odom_state()
         // tf情報をbroadcast(座標系の設定)
         odom_state_broadcaster.sendTransform(odom_state);
         // odom_state_broadcaster_.sendTransform(odom_state);
-        printf("broadcast_odom_state\n");
+        //printf("broadcast_odom_state\n");
     }
 }
 
@@ -271,7 +271,7 @@ double EMCL::normalize_angle(double angle)
 {
     while(M_PI  < angle) angle -= 2.0*M_PI;
     while(angle < -M_PI) angle += 2.0*M_PI;
-    printf("norm_angle\n");
+    //printf("norm_angle\n");
 
     return angle;
 }
@@ -283,7 +283,7 @@ void EMCL::localize()
     observation_update();     // 観測更新（位置推定・リサンプリングを含む）
     publish_estimated_pose(); // 推定位置のパブリッシュ
     publish_particles();      // パーティクルクラウドのパブリッシュ
-    printf("localize\n");
+    //printf("localize\n");
 }
 
 // 動作更新
@@ -309,7 +309,7 @@ void EMCL::motion_update()
     for(auto& p : particles_){
         p.pose_.move(length, direction, dyaw, odom_model_.get_fw_noise(), odom_model_.get_rot_noise());
     }
-    printf("motion_update\n");
+    //printf("motion_update\n");
 }
 
 // 観測更新（位置推定・リサンプリングを含む）
@@ -339,7 +339,7 @@ void EMCL::observation_update()
         resampling();    // リサンプリング
         reset_counter = 0;
     }
-    printf("observation_update");
+    //printf("observation_update");
 }
 
 // 周辺尤度の算出
@@ -349,7 +349,7 @@ double EMCL::calc_marginal_likelihood()
     for(const auto& p : particles_){
         sum += p.weight();
     }
-    printf("calc_marginal_likelihood\n");
+    //printf("calc_marginal_likelihood\n");
     return sum;
 }
 
@@ -360,7 +360,7 @@ void EMCL::estimate_pose()
     weighted_mean_pose(); // 加重平均
     // max_weight_pose(); // 最大の重みを有するポーズ
     // median_pose(); // 中央値
-    printf("estimate_pose\n");
+    //printf("estimate_pose\n");
 }
 
 // 推定位置の決定（平均）
@@ -407,7 +407,7 @@ void EMCL::weighted_mean_pose()
     }
 
     estimated_pose_.set(x_mean, y_mean, yaw_mean);
-    printf("weighted_mean_pose\n");
+    //printf("weighted_mean_pose\n");
 }
 
 // 重みの正規化
@@ -420,7 +420,7 @@ void EMCL::normalize_belief()
     for(auto& p : particles_){
         p.set_weight(p.weight() / weight_sum);
     }
-    printf("noomalize_belief\n");
+    //printf("noomalize_belief\n");
 }
 
 // 推定位置の決定（最大の重みを有するポーズ）
@@ -456,7 +456,7 @@ void EMCL::median_pose()
     const double y_median   = get_median(y_list);
     const double yaw_median = get_median(yaw_list);
     estimated_pose_.set(x_median, y_median, yaw_median);
-    printf("median_pose\n");
+    //printf("median_pose\n");
 }
 
 // 配列の中央値を返す
@@ -468,7 +468,7 @@ double EMCL::get_median(std::vector<double>& data)
     }else{
         return (data[data.size()/2 - 1] + data[data.size()/2]) / 2.0;
     }
-    printf("get_mediam\n");
+    //printf("get_mediam\n");
 }
 
 // 膨張リセット
@@ -486,7 +486,7 @@ void EMCL::expansion_resetting()
 
     // 重みを初期化
     reset_weight();
-    printf("expansion_resetting\n");
+    //printf("expansion_resetting\n");
 }
 
 // リサンプリング（系統サンプリング）
@@ -527,7 +527,7 @@ void EMCL::resampling()
 
     // 重みを初期化
     reset_weight();
-    printf("resampling\n");
+    //printf("resampling\n");
 }
 
 // 推定位置のパブリッシュ
@@ -542,7 +542,7 @@ void EMCL::publish_estimated_pose()
     tf2::convert(q,estimated_pose_msg_.pose.orientation);
 
     pub_estimated_pose_ -> publish(estimated_pose_msg_);
-    printf("publish_estimated_pose\n");
+    //printf("publish_estimated_pose\n");
 }
 
 // パーティクルクラウドのパブリッシュ
@@ -569,5 +569,5 @@ void EMCL::publish_particles()
 
         pub_particle_cloud_ -> publish(particle_cloud_msg_);
     }
-    printf("publish_particles\n");
+    //printf("publish_particles\n");
 }
