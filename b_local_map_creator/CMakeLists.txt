@@ -7,8 +7,8 @@ find_package(ament_cmake_auto REQUIRED)
 ament_auto_find_build_dependencies()
 # 実行ファイルを作成する
 ament_auto_add_executable(${PROJECT_NAME}_node
-  src/chibi24_b/b_local_map_creator.cpp
-  src/chibi24_b/b_local_map_creator_node.cpp)
+  src/b_local_map_creator.cpp
+  src/b_local_map_creator_node.cpp)
 # launchファイルをインストール（ament_package_indexが探せる場所に置く）
 install(DIRECTORY
   launch
