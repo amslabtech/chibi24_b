@@ -88,7 +88,9 @@ void DWAPlanner::local_goal_callback(const geometry_msgs::msg::PointStamped::Sha
     {
         //lookupTransform("変換のベースとなる座標系","変更したい対象の座標系",変更したい時間(過去データを扱う場合は注意が必要))
         //transformStamped = tfBuffer_->lookupTransform(this->get_parameter("robot_frame").as_string(),"map", tf2::TimePointZero); //座標系の変換  
+        printf("1\n");
         transformStamped = tfBuffer_->lookupTransform("base_link","map", tf2::TimePointZero); //座標系の変換 
+        printf("2\n");
         // 取得した変換情報を表示
         RCLCPP_INFO(this->get_logger(), "Transform: [%f, %f, %f]", transformStamped.transform.translation.x, transformStamped.transform.translation.y, transformStamped.transform.translation.z);
         flag_local_goal_ = true;

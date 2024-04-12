@@ -16,27 +16,27 @@ def generate_launch_description():
             parameters=[{'use_sim_time': True}]
         ),
         Node(
-            package='chibi24_c_localizer',
-            executable='chibi24_c_localizer_node',
+            package='b_localizer',
+            executable='b_localizer_node',
             #output='screen',
             parameters=[{'use_sim_time': True}]
         ),
         Node(
-            package='chibi24_c_global_path_planner',
-            executable='chibi24_c_global_path_planner_node',
+            package='b_global_path_planner',
+            executable='b_global_path_planner_node',
             #output='screen',
             parameters=[{'use_sim_time': True}]
         ),
         Node(
             package='b_local_goal_creator',
             executable='b_local_goal_creator_node',
-            #output='screen',
+            output='screen',
             parameters=[{'use_sim_time': True}]
         ),
         Node(
             package='b_local_path_planner',
             executable='b_local_path_planner_node',
-            #output='screen',
+            output='screen',
             parameters=[{'use_sim_time': True}]
         ),
         
