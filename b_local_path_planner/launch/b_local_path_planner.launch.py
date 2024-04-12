@@ -22,8 +22,8 @@ def generate_launch_description():
             parameters=[{'use_sim_time': True}]
         ),
         Node(
-            package='b_global_path_planner',
-            executable='b_global_path_planner_node',
+            package='chibi24_c_global_path_planner',
+            executable='chibi24_c_global_path_planner_node',
             #output='screen',
             parameters=[{'use_sim_time': True}]
         ),
