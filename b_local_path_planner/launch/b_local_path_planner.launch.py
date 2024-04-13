@@ -30,7 +30,7 @@ def generate_launch_description():
         Node(
             package='b_local_goal_creator',
             executable='b_local_goal_creator_node',
-            output='screen',
+            #output='screen',
             parameters=[{'use_sim_time': True}]
         ),
         Node(

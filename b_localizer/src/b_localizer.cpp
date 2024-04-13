@@ -9,7 +9,7 @@ EMCL::EMCL():Node("b_localizer")
 {
    // パラメータの設定(EMCL)
     this -> declare_parameter("flag_init_noise", true);
-    this -> declare_parameter("flag_broadcast", true);
+    this -> declare_parameter("flag_broadcast", true); //議論の余地あり
     this -> declare_parameter("is_visible", true);
     this -> declare_parameter("hz", 10);
     this -> declare_parameter("particle_num", 500);
@@ -245,7 +245,8 @@ void EMCL::broadcast_odom_state()
         geometry_msgs::msg::TransformStamped odom_state;
 
         // 現在の時間の格納
-        odom_state.header.stamp = rclcpp::Clock(RCL_ROS_TIME).now();
+        //odom_state.header.stamp = rclcpp::Clock(RCL_ROS_TIME).now();
+        odom_state.header.stamp = get_clock()->now();
 
         // 親フレーム・子フレームの指定
         odom_state.header.frame_id = map_.header.frame_id;

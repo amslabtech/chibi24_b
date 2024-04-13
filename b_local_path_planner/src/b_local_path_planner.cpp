@@ -6,15 +6,15 @@ DWAPlanner::DWAPlanner() : Node("b_local_path_planner")
     this->declare_parameter("hz", 50);
     this->declare_parameter("dt", 0.1);  //変更の余地アリ
     this->declare_parameter("goal_tolerance", 0.3); //変更の余地あり
-    this->declare_parameter("max_vel", 0.45);
+    this->declare_parameter("max_vel", 0.4);
     this->declare_parameter("min_vel", 0.0);
-    this->declare_parameter("max_yawrate", 1.0);
-    this->declare_parameter("min_yawrate", -1.0);
+    this->declare_parameter("max_yawrate", 0.5);
+    this->declare_parameter("min_yawrate", -0.5);
     this->declare_parameter("max_accel", 1000.0);
     this->declare_parameter("max_dyawrate", 1000.0);
     this->declare_parameter("v_reso", 0.05);
     this->declare_parameter("y_reso", 0.1);
-    this->declare_parameter("predict_time", 2.0); //変更の余地あり
+    this->declare_parameter("predict_time", 4.0); //変更の余地あり
     this->declare_parameter("heading_cost_gain", 1.0);
     this->declare_parameter("velocity_cost_gain", 1.0);
     this->declare_parameter("distance_cost_gain", 1.0);
@@ -42,6 +42,7 @@ DWAPlanner::DWAPlanner() : Node("b_local_path_planner")
     this->get_parameter("radius_margin",radius_margin_);
     this->get_parameter("search_range", search_range_);
     //this->declare_parameter<std::string>("robot_frame","base_link");
+    /*
     printf("hz =%d\n",hz_);
     printf("dt =%f\n",dt_);
     printf("predict_time =%f\n",predict_time_);
@@ -58,14 +59,14 @@ DWAPlanner::DWAPlanner() : Node("b_local_path_planner")
     printf("velocity_cost_gain =%f\n",velocity_cost_gain_);
     printf("distance_cost_gain =%f\n",distance_cost_gain_);
     printf("serch_range =%f\n",search_range_);
-    
+    */
 
 
 
 
     // Subscriber
     local_goal_sub_ = this->create_subscription<geometry_msgs::msg::PointStamped>("/local_goal", rclcpp::QoS(1).reliable(), std::bind(&DWAPlanner::local_goal_callback, this, std::placeholders::_1));
-    obs_pose_sub_ = this->create_subscription<geometry_msgs::msg::PoseArray>("/obstacle/pose", rclcpp::QoS(1).reliable(), std::bind(&DWAPlanner::obs_pose_callback, this, std::placeholders::_1));
+    obs_pose_sub_ = this->create_subscription<geometry_msgs::msg::PoseArray>("/obstacle_pose", rclcpp::QoS(1).reliable(), std::bind(&DWAPlanner::obs_pose_callback, this, std::placeholders::_1));
 
     // Publisher
     cmd_speed_pub_ = this->create_publisher<roomba_500driver_meiji::msg::RoombaCtrl>("/roomba/control", rclcpp::QoS(1).reliable());
@@ -73,7 +74,7 @@ DWAPlanner::DWAPlanner() : Node("b_local_path_planner")
     optimal_path_pub_ = this->create_publisher<nav_msgs::msg::Path>("/optimal/path", rclcpp::QoS(1).reliable());
 
 
-    tfBuffer_ = std::make_unique<tf2_ros::Buffer>(this->get_clock());
+    tfBuffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
     tfListener_ = std::make_shared<tf2_ros::TransformListener>(*tfBuffer_);
     //predict_path_.header.frame_id ="base_link";
     //optimal_path_.header.frame_id ="base_link";

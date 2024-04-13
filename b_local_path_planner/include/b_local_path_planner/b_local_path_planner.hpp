@@ -107,10 +107,10 @@ class DWAPlanner : public rclcpp::Node
 
         //tf2_ros::Buffer tfBuffer_;
         //tf2_ros::TransformListener tfListener_; 
-        std::unique_ptr<tf2_ros::Buffer> tfBuffer_;
-        std::shared_ptr<tf2_ros::TransformListener> tfListener_;
-        //std::shared_ptr<tf2_ros::Buffer> tfBuffer_;
+        //std::unique_ptr<tf2_ros::Buffer> tfBuffer_;
         //std::shared_ptr<tf2_ros::TransformListener> tfListener_;
+        std::shared_ptr<tf2_ros::Buffer> tfBuffer_;
+        std::shared_ptr<tf2_ros::TransformListener> tfListener_;
         //tfBuffer_.setUsingDedicatedThread(true);
 
 

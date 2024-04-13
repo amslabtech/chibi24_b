@@ -12,7 +12,7 @@ ObstacleDetector::ObstacleDetector()
   //printf("ignore_angle_range_list = %f\n",ignore_angle_range_list_[0]);
 
   scan_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>("/scan",rclcpp::QoS(1).reliable(),std::bind(&ObstacleDetector::scan_callback,this,std::placeholders::_1));
-  obstacle_pose_pub_ = this->create_publisher<geometry_msgs::msg::PoseArray>("/obstacle/pose",rclcpp::QoS(1).reliable());
+  obstacle_pose_pub_ = this->create_publisher<geometry_msgs::msg::PoseArray>("/obstacle_pose",rclcpp::QoS(1).reliable());
 
   // scan_ を初期化する
   scan_ = std::nullopt;
