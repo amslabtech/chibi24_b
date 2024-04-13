@@ -39,7 +39,10 @@ void LocalGoalCreator::pathCallback(const nav_msgs::msg::Path::SharedPtr msg)
 {
     path_ = *msg;
     is_path_ = true;
-}goal_Freq() { return hz_; }
+}
+
+int LocalGoalCreator::getOdomFreq() { return hz_; }
+
 
 void LocalGoalCreator::process()
 {
