@@ -10,7 +10,7 @@ LocalMapCreator::LocalMapCreator() : Node("b_local_map_creator")
     local_map_resolution_ = this->declare_parameter<double>("map_resolution",0.025);
     //printf("map_resolution = %f\n",local_map_resolution_);
 
-    sub_obs_poses_ = this->create_subscription<geometry_msgs::msg::PoseArray>("/obstacle_pose",rclcpp::QoS(1).reliable(),std::bind(&LocalMapCreator::obs_poses_callback,this,std::placeholders::_1));
+    sub_obs_poses_ = this->create_subscription<geometry_msgs::msg::PoseArray>("/obstacle/pose",rclcpp::QoS(1).reliable(),std::bind(&LocalMapCreator::obs_poses_callback,this,std::placeholders::_1));
     pub_local_map_ = this->create_publisher<nav_msgs::msg::OccupancyGrid>("/local/map",rclcpp::QoS(1).reliable());
 
     local_map_.info.resolution = local_map_resolution_;
