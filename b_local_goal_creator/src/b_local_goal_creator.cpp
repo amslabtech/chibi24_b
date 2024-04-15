@@ -33,7 +33,7 @@ LocalGoalCreator::LocalGoalCreator() : Node("LocalGoalCreator")
 void LocalGoalCreator::poseCallback(const geometry_msgs::msg::PoseStamped::SharedPtr msg)
 {
     pose_ = *msg;
-    printf("poseCallback\n");
+    //printf("poseCallback\n");
 }
 
 void LocalGoalCreator::pathCallback(const nav_msgs::msg::Path::SharedPtr msg)

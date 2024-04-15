@@ -90,7 +90,7 @@ void DWAPlanner::local_goal_callback(const geometry_msgs::msg::PointStamped::Sha
         //  取得した変換情報を表示
         // RCLCPP_INFO(this->get_logger(), "Transform: [%f, %f, %f]", transformStamped.transform.translation.x, transformStamped.transform.translation.y, transformStamped.transform.translation.z);
         flag_local_goal_ = true;
-        // printf("transform\n");
+         printf("transform\n");
     }
     catch (tf2::TransformException &ex) // エラー
     {
