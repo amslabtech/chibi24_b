@@ -13,14 +13,14 @@ DWAPlanner::DWAPlanner() : Node("b_local_path_planner")
     this->declare_parameter("max_accel", 1000.0);
     this->declare_parameter("max_dyawrate", 1000.0);
     this->declare_parameter("v_reso", 0.05);
-    this->declare_parameter("y_reso", 0.1);
-    this->declare_parameter("predict_time", 4.0); //変更の余地あり
-    this->declare_parameter("heading_cost_gain", 1.0);
-    this->declare_parameter("velocity_cost_gain", 1.0);
-    this->declare_parameter("distance_cost_gain", 1.0);
-    this->declare_parameter("robot_radius", 0.25); //いらない
-    this->declare_parameter("radius_margin", 0.1); //いらない
-    this->declare_parameter("search_range", 0.95); //変更の余地あり
+    this->declare_parameter("y_reso", 0.02);
+    this->declare_parameter("predict_time",3.0); // 変更の余地あり
+    this->declare_parameter("heading_cost_gain", 0.7);
+    this->declare_parameter("velocity_cost_gain", 0.6);
+    this->declare_parameter("distance_cost_gain", 0.8);
+    this->declare_parameter("robot_radius", 0.25); // いらない
+    this->declare_parameter("radius_margin", 0.1); // いらない
+    this->declare_parameter("search_range", 0.95);  // 変更の余地あり
 
     // パラメータの取得
     this->get_parameter("hz", hz_);
@@ -41,28 +41,25 @@ DWAPlanner::DWAPlanner() : Node("b_local_path_planner")
     this->get_parameter("robot_radius", robot_radius_);
     this->get_parameter("radius_margin",radius_margin_);
     this->get_parameter("search_range", search_range_);
-    //this->declare_parameter<std::string>("robot_frame","base_link");
-    /*
-    printf("hz =%d\n",hz_);
-    printf("dt =%f\n",dt_);
-    printf("predict_time =%f\n",predict_time_);
-    printf("goal_tolerance =%f\n",goal_tolerance_);
-    printf("max_vel =%f\n",max_vel_);
-    printf("min_vel =%f\n",min_vel_);
-    printf("max_yawrate =%f\n",max_yawrate_);
-    printf("min_yawrate =%f\n",min_yawrate_);
-    printf("max_accel =%f\n",max_accel_);
-    printf("max_dyawrate =%f\n",max_dyawrate_);
-    printf("v_reso =%f\n",v_reso_);
-    printf("y_reso =%f\n",y_reso_);
-    printf("heading_cost_gain =%f\n",heading_cost_gain_);
-    printf("velocity_cost_gain =%f\n",velocity_cost_gain_);
-    printf("distance_cost_gain =%f\n",distance_cost_gain_);
-    printf("serch_range =%f\n",search_range_);
-    */
-
-
-
+    // this->declare_parameter<std::string>("robot_frame","base_link");
+    
+    // printf("hz =%d\n",hz_);
+    // printf("dt =%f\n",dt_);
+    // printf("predict_time =%f\n",predict_time_);
+    // printf("goal_tolerance =%f\n",goal_tolerance_);
+    //printf("max_vel =%f\n",max_vel_);
+    // printf("min_vel =%f\n",min_vel_);
+    // printf("max_yawrate =%f\n",max_yawrate_);
+    // printf("min_yawrate =%f\n",min_yawrate_);
+    // printf("max_accel =%f\n",max_accel_);
+    // printf("max_dyawrate =%f\n",max_dyawrate_);
+    // printf("v_reso =%f\n",v_reso_);
+    // printf("y_reso =%f\n",y_reso_);
+    // printf("heading_cost_gain =%f\n",heading_cost_gain_);
+    // printf("velocity_cost_gain =%f\n",velocity_cost_gain_);
+    // printf("distance_cost_gain =%f\n",distance_cost_gain_);
+    // printf("serch_range =%f\n",search_range_);
+    
 
     // Subscriber
     local_goal_sub_ = this->create_subscription<geometry_msgs::msg::PointStamped>("/local_goal", rclcpp::QoS(1).reliable(), std::bind(&DWAPlanner::local_goal_callback, this, std::placeholders::_1));
@@ -299,6 +296,10 @@ double DWAPlanner::calc_eval(const std::vector<State> &trajectory) //評価関�
     // ROS_INFO_STREAM("heading: " << heading);
     // ROS_INFO_STREAM("velocity: " << velocity);
     // ROS_INFO_STREAM("distance: " << distance);
+
+    // RCLCPP_INFO(rclcpp::get_logger("b_local_path_planner"),"heading: %f" , heading_cost_gain_*heading);
+    // RCLCPP_INFO(rclcpp::get_logger("b_local_path_planner"),"velocity: %f" , velocity_cost_gain_*velocity);
+    // RCLCPP_INFO(rclcpp::get_logger("b_local_path_planner"),"distance: %f" , distance_cost_gain_*distance);
 
     return heading_cost_gain_ * heading + velocity_cost_gain_ * velocity + distance_cost_gain_ * distance;
 }

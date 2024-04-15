@@ -33,13 +33,16 @@ LocalGoalCreator::LocalGoalCreator() : Node("LocalGoalCreator")
 void LocalGoalCreator::poseCallback(const geometry_msgs::msg::PoseStamped::SharedPtr msg)
 {
     pose_ = *msg;
+    printf("poseCallback\n");
 }
 
 void LocalGoalCreator::pathCallback(const nav_msgs::msg::Path::SharedPtr msg)
 {
     path_ = *msg;
     is_path_ = true;
-}goal_Freq() { return hz_; }
+    printf("pathCallback\n");
+}
+int LocalGoalCreator::getOdomFreq() { return hz_; }
 
 void LocalGoalCreator::process()
 {
@@ -65,6 +68,7 @@ void LocalGoalCreator::publishGoal()
     }
     goal_.header.stamp = this->get_clock()->now();
     goal_.point = path_.poses[goal_index_].pose.position;
+    printf("pub\n");
     local_goal_pub_->publish(goal_);
 }
 
