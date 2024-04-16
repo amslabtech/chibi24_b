@@ -38,7 +38,7 @@ void LocalGoalCreator::poseCallback(const geometry_msgs::msg::PoseStamped::Share
 
 void LocalGoalCreator::pathCallback(const nav_msgs::msg::Path::SharedPtr msg)
 {
-    path_ = *msg;
+    path_ = msg->poses;
     is_path_ = true;
     printf("pathCallback\n");
 }
@@ -58,24 +58,27 @@ void LocalGoalCreator::process()
 void LocalGoalCreator::publishGoal()
 {
     double distance = getDistance();
-    if(distance < taeget_distance_)
+    while(distance < taeget_distance_)
     {
         goal_index_ += index_step_;
-        if(goal_index_ >= path_.poses.size())
+        distance = getDistance();
+        if(goal_index_ >= path_.size())
         {
-            goal_index_ = path_.poses.size() - 1;
+            goal_index_ = path_.size() - 1;
+            break;
         }
     }
+    goal_.point.x = path_[goal_index_].pose.position.x;
+    goal_.point.y = path_[goal_index_].pose.position.y;
     goal_.header.stamp = this->get_clock()->now();
-    goal_.point = path_.poses[goal_index_].pose.position;
     printf("pub\n");
     local_goal_pub_->publish(goal_);
 }
 
 double LocalGoalCreator::getDistance()
 {
-    double dx = path_.poses[goal_index_].pose.position.x - pose_.pose.position.x;
-    double dy = path_.poses[goal_index_].pose.position.y - pose_.pose.position.y;
+    double dx = path_[goal_index_].pose.position.x - pose_.pose.position.x;
+    double dy = path_[goal_index_].pose.position.y - pose_.pose.position.y;
     return hypot(dx, dy);
 }
 

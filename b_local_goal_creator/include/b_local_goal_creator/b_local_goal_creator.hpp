@@ -37,8 +37,8 @@ private:
     rclcpp::Publisher<geometry_msgs::msg::PointStamped>::SharedPtr local_goal_pub_;
 
 
-    nav_msgs::msg::Path path_;
     geometry_msgs::msg::PointStamped goal_;
+    std::vector<geometry_msgs::msg::PoseStamped> path_;
     geometry_msgs::msg::PoseStamped pose_;
 };
 
