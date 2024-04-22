@@ -3,6 +3,7 @@
 DWAPlanner::DWAPlanner() : Node("b_local_path_planner")
 {
     // パラメータ宣言
+    /*+
     this->declare_parameter("hz", 50);
     this->declare_parameter("dt", 0.1);  //変更の余地アリ
     this->declare_parameter("goal_tolerance", 1.0); //変更の余地あり
@@ -32,15 +33,103 @@ DWAPlanner::DWAPlanner() : Node("b_local_path_planner")
     this->get_parameter("min_yawrate", min_yawrate_);
     this->get_parameter("max_accel", max_accel_);
     this->get_parameter("max_dyawrate", max_dyawrate_);
-    this->get_parameter("v_reso", v_reso_);
-    this->get_parameter("y_reso", y_reso_);
+    this->get_parameter("v_reso", vel_reso_);
+    this->get_parameter("y_reso", yawrate_reso_);
     this->get_parameter("predict_time", predict_time_);
-    this->get_parameter("heading_cost_gain", heading_cost_gain_);
-    this->get_parameter("velocity_cost_gain", velocity_cost_gain_);
-    this->get_parameter("distance_cost_gain", distance_cost_gain_);
+    this->get_parameter("heading_cost_gain", weight_heading_);
+    this->get_parameter("velocity_cost_gain", weight_vel_);
+    this->get_parameter("distance_cost_gain", weight_dist_);
     this->get_parameter("robot_radius", robot_radius_);
     this->get_parameter("radius_margin",radius_margin_);
     this->get_parameter("search_range", search_range_);
+    */
+
+    // パラメータの取得 
+    // パスを可視化するかの設定用
+    declare_parameter<bool>("is_visible", true);
+    get_parameter("is_visible", is_visible_);
+
+    // 制御周波数 [Hz]
+    declare_parameter<int>("hz", 10);
+    get_parameter("hz", hz_);
+    
+    // frame_id
+    //declare_parameter<std::string>("robot_frame", "base_link"); 
+    //get_parameter("robot_frame", robot_frame_);
+
+    // 速度制限
+    declare_parameter<double>("max_vel1", 0.35); // [m/s]（平常時）//0.35
+    get_parameter("max_vel1", max_vel1_);
+    declare_parameter<double>("max_vel2", 0.25); //[m/s]（減速時）//0.25
+    get_parameter("max_vel2", max_vel2_);
+    declare_parameter<double>("avoid_thres_vel", 0.25); //[m/s]（回避中か判断する閾値）
+    get_parameter("avoid_thres_vel", avoid_thres_vel_);
+    declare_parameter<double>("min_vel", 0.15); //[m/s] //0.0あげてみた
+    get_parameter("min_vel", min_vel_);
+    declare_parameter<double>("max_yawrate1", 0.8); //[rad/s]（平常時）//1.0
+    get_parameter("max_yawrate1", max_yawrate1_);
+    declare_parameter<double>("max_yawrate2", 0.45); //[rad/s]（減速時）//0.55 0.75
+    get_parameter("max_yawrate2", max_yawrate2_);
+    declare_parameter<double>("turn_thres_yawrate", 0.25); //[rad/s]（旋回中か判断する閾値）
+    get_parameter("turn_thres_yawrate", turn_thres_yawrate_);
+    declare_parameter<double>("mode_log_time", 6.0); //5.0
+    get_parameter("mode_log_time", mode_log_time_);
+
+    // 加速度制限
+    declare_parameter<double>("max_accel", 1000.0); //[m/s^2]
+    get_parameter("max_accel", max_accel_);
+    declare_parameter<double>("max_dyawrate", 1000.0); //[rad/s^2]
+    get_parameter("max_dyawrate", max_dyawrate_);
+
+    // 速度解像度
+    declare_parameter<double>("vel_reso", 0.05); //[m/s]
+    get_parameter("vel_reso", vel_reso_);
+    declare_parameter<double>("yawrate_reso", 0.02); //[rad/s]
+    get_parameter("yawrate_reso", yawrate_reso_);
+
+    // 停止状態か判断する閾値
+    declare_parameter<double>("stop_vel_th", 0.1);    
+    get_parameter("stop_vel_th", stop_vel_th_);
+    declare_parameter<double>("stop_yawrate_th", 0.1);    
+    get_parameter("stop_yawrate_th", stop_yawrate_th_);
+
+    // 時間 [s]
+    declare_parameter<double>("dt", 0.1);    
+    get_parameter("dt", dt_);
+    declare_parameter<double>("predict_time1", 4.0); //2.0    
+    get_parameter("predict_time1", predict_time1_);
+    declare_parameter<double>("predict_time2", 6.0); //6.0    
+    get_parameter("predict_time2", predict_time2_);
+
+    // 機体サイズ（半径）[m]
+    declare_parameter<double>("roomba_radius", 0.20); // 0.25
+    get_parameter("roomba_radius", roomba_radius_);
+    declare_parameter<double>("radius_margin1", 0.1); //（平常時）//0.1
+    get_parameter("radius_margin1", radius_margin1_);
+    declare_parameter<double>("radius_margin2", 0.04); //（減速時）//0.04
+    get_parameter("radius_margin2", radius_margin2_);
+
+    // 重み定数 [-]
+    declare_parameter<double>("weight_heading1", 0.8); //（平常時）  //0.85  
+    get_parameter("weight_heading1", weight_heading1_);
+    declare_parameter<double>("weight_heading2", 0.65);  //（減速時） //0.7  
+    get_parameter("weight_heading2", weight_heading2_);
+    declare_parameter<double>("weight_dist1", 1.1); //（平常時) 1.5
+    get_parameter("weight_dist1", weight_dist1_);
+    declare_parameter<double>("weight_dist2", 0.7); //（減速時） 0.8
+    get_parameter("weight_dist2", weight_dist2_);
+    declare_parameter<double>("weight_vel", 0.6);    
+    get_parameter("weight_vel", weight_vel_);  
+    
+    // 許容誤差 [m]
+    declare_parameter<double>("goal_tolerance", 1.0);    
+    get_parameter("goal_tolerance", goal_tolerance_);
+    
+    // 評価関数distで探索する範囲[m]
+    declare_parameter<double>("search_range", 0.95);    
+    get_parameter("search_range", search_range_);
+
+
     // this->declare_parameter<std::string>("robot_frame","base_link");
     
     // printf("hz =%d\n",hz_);
@@ -53,11 +142,11 @@ DWAPlanner::DWAPlanner() : Node("b_local_path_planner")
     // printf("min_yawrate =%f\n",min_yawrate_);
     // printf("max_accel =%f\n",max_accel_);
     // printf("max_dyawrate =%f\n",max_dyawrate_);
-    // printf("v_reso =%f\n",v_reso_);
-    // printf("y_reso =%f\n",y_reso_);
-    // printf("heading_cost_gain =%f\n",heading_cost_gain_);
-    // printf("velocity_cost_gain =%f\n",velocity_cost_gain_);
-    // printf("distance_cost_gain =%f\n",distance_cost_gain_);
+    // printf("v_reso =%f\n",vel_reso_);
+    // printf("y_reso =%f\n",yawrate_reso_);
+    // printf("heading_cost_gain =%f\n",weight_heading_);
+    // printf("velocity_cost_gain =%f\n",weight_vel_);
+    // printf("distance_cost_gain =%f\n",weight_dist_);
     // printf("serch_range =%f\n",search_range_);
     
 
@@ -128,7 +217,9 @@ bool DWAPlanner::is_goal_reached() //情報が適切にsubscribeされている�
     }
     else
     {
-        return false;
+        roomba_ctl(0.0, 0.0);
+        exit(0); // ノード終了
+        //return false;
     }
 }
 
@@ -149,14 +240,19 @@ std::vector<double> DWAPlanner::calc_input() //計算(速度と回転角速度�
     // ROS_WARN_STREAM("calc_input");
     std::vector<double> input = {0.0, 0.0};
     std::vector<std::vector<State>> trajectory_list;
-    double max_score = 0.0;
+    double max_score = -1e6;
     int max_score_index = 0;
+
+    // 旋回状況に応じた減速機能
+    change_mode();
+
+
     calc_dynamic_window(); //roombaを制御するパラメータの範囲を決定 
 
     int i = 0;
-    for (double velocity = dw_.min_vel; velocity <= dw_.max_vel; velocity += v_reso_)
+    for (double velocity = dw_.min_vel; velocity <= dw_.max_vel; velocity += vel_reso_)
     {
-        for (double yawrate = dw_.min_yawrate; yawrate <= dw_.max_yawrate; yawrate += y_reso_)
+        for (double yawrate = dw_.min_yawrate; yawrate <= dw_.max_yawrate; yawrate += yawrate_reso_)
         {
             //RCLCPP_WARN_STREAM(rclcpp::get_logger("b_local_path_planner"),"max_yawrate: " << dw_.max_yawrate);
             //RCLCPP_WARN_STREAM(rclcpp::get_logger("b_local_path_planner"),"yawrate: " << yawrate);
@@ -168,6 +264,10 @@ std::vector<double> DWAPlanner::calc_input() //計算(速度と回転角速度�
             trajectory_list.push_back(trajectory);
             // ROS_INFO_STREAM("trajectory.back().x: " << trajectory.back().x);
             // ROS_INFO_STREAM("trajectory.back().y: " << trajectory.back().y);
+
+
+            if(velocity<stop_vel_th_ and abs(yawrate)<stop_yawrate_th_)
+                score = -1e6;
 
             if (score > max_score) //スコア比較
             {
@@ -208,7 +308,49 @@ std::vector<double> DWAPlanner::calc_input() //計算(速度と回転角速度�
     return input;
 }
 
+// 旋回状況に応じた減速機能
+void DWAPlanner::change_mode()
+{
+    if(abs(roomba_.yawrate)>turn_thres_yawrate_ or roomba_.vel<avoid_thres_vel_)
+        mode_log_.push_back(2.0); // 減速モード
+    else
+        mode_log_.push_back(2.0); // 常に減速モード
+        //mode_log_.push_back(1.0);
 
+    if(mode_log_.size() > hz_*mode_log_time_)
+        mode_log_.erase(mode_log_.begin());
+
+    double mode_sum = 0.0;
+    for(const auto& mode : mode_log_)
+    {
+        mode_sum += mode;
+    }
+
+    double mode_avg = mode_sum/mode_log_.size();
+
+    if(mode_avg < 1.5) // 平常時
+    {
+        mode_           = 1;
+        max_vel_        = max_vel1_;
+        max_yawrate_    = max_yawrate1_;
+        radius_margin_  = radius_margin1_;
+        weight_heading_ = weight_heading1_;
+        weight_dist_    = weight_dist1_;
+        predict_time_   = predict_time1_;
+        // std::cout << "減速OFF" << std::endl;
+    }
+    else // 減速時
+    {
+        mode_           = 2;
+        max_vel_        = max_vel2_;
+        max_yawrate_    = max_yawrate2_;
+        radius_margin_  = radius_margin2_;
+        weight_heading_ = weight_heading2_;
+        weight_dist_    = weight_dist2_;
+        predict_time_   = predict_time2_;
+        // std::cout << "減速ON" << std::endl;
+    }
+}
 
 void DWAPlanner::process() //全体の処理(主要なループ)
 {
@@ -236,7 +378,7 @@ void DWAPlanner::calc_dynamic_window() //roombaを制御するパラメータの
 {
     //RCLCPP_WARN_STREAM(rclcpp::get_logger("b_local_path_planner"),"calc_dynamic_window");
     //制御可能範囲::ロボットが取りうる制御入力の最大値と最小値の範囲を意味する
-    double Vs[] = {min_vel_, max_vel_, min_yawrate_, max_yawrate_}; //roombaの性能(速度,回転角速度)
+    double Vs[] = {min_vel_, max_vel_, -max_yawrate_, max_yawrate_}; //roombaの性能(速度,回転角速度)
     //動的制御可能範囲::現在の速度とスペック上の最大加速度から計算した次の時刻に取りうる最大最小の制御入力
     double Vd[] = {roomba_.vel - max_accel_ * dt_,
                    roomba_.vel + max_accel_ * dt_,
@@ -307,20 +449,18 @@ double DWAPlanner::calc_eval(const std::vector<State> &trajectory) //評価関�
     // ROS_INFO_STREAM("velocity: " << velocity);
     // ROS_INFO_STREAM("distance: " << distance);
 
-    RCLCPP_INFO(rclcpp::get_logger("b_local_path_planner"),"heading: %f" , heading_cost_gain_*heading);
-    RCLCPP_INFO(rclcpp::get_logger("b_local_path_planner"),"velocity: %f" , velocity_cost_gain_*velocity);
-    RCLCPP_INFO(rclcpp::get_logger("b_local_path_planner"),"distance: %f" , distance_cost_gain_*distance);
+    RCLCPP_INFO(rclcpp::get_logger("b_local_path_planner"),"heading: %f" , weight_heading_*heading);
+    RCLCPP_INFO(rclcpp::get_logger("b_local_path_planner"),"velocity: %f" , weight_vel_*velocity);
+    RCLCPP_INFO(rclcpp::get_logger("b_local_path_planner"),"distance: %f" , weight_dist_*distance);
 
-    return heading_cost_gain_ * heading + velocity_cost_gain_ * velocity + distance_cost_gain_ * distance;
+    return weight_heading_ * heading + weight_vel_ * velocity + weight_dist_ * distance;
 }
 
 double DWAPlanner::calc_heading_eval(const std::vector<State> &trajectory) //方向評価 ゴールの方を向いているほど高評価
-{
-    double dx = local_goal_.point.x - trajectory.back().x;
-    double dy = local_goal_.point.y - trajectory.back().y;
-    double goal_yaw = atan2(dy, dx);
-    double yaw = trajectory.back().yaw;
-    double heading = 0.0;
+{// 壁に衝突したパスを評価
+            if(dist <= roomba_radius_+radius_margin_)
+                return -1e6;
+
     if (goal_yaw > yaw)
     {
         heading = goal_yaw - yaw;
@@ -356,7 +496,12 @@ double DWAPlanner::calc_distance_eval(const std::vector<State> &trajectory) //�
             double dx = state.x - obs.position.x;
             double dy = state.y - obs.position.y;
             double dist = hypot(dx, dy);
-           
+
+
+            // 壁に衝突したパスを評価
+            if(dist <= roomba_radius_+radius_margin_)
+                return -1e6;
+
             if (dist < min_dist)
             {
                 min_dist = dist;

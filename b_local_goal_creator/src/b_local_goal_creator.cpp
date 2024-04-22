@@ -73,10 +73,17 @@ void LocalGoalCreator::publishGoal()
             break;
         }
     }
+<<<<<<< HEAD
     
     goal_.point = path_[goal_index_].pose.position;
     //printf("pub\n");
     goal_.header.stamp = this->get_clock()->now();
+=======
+    goal_.point.x = path_[goal_index_].pose.position.x;
+    goal_.point.y = path_[goal_index_].pose.position.y;
+    goal_.header.stamp = this->get_clock()->now();
+    printf("pub\n");
+>>>>>>> fca93e568ea2262602baf737e45ac4f2d0156bdc
     local_goal_pub_->publish(goal_);
 }
 

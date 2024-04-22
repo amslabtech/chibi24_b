@@ -38,8 +38,12 @@ private:
 
     std::vector<geometry_msgs::msg::PoseStamped> path_;
 
+<<<<<<< HEAD
     //nav_msgs::msg::Path path_;
+=======
+>>>>>>> fca93e568ea2262602baf737e45ac4f2d0156bdc
     geometry_msgs::msg::PointStamped goal_;
+    std::vector<geometry_msgs::msg::PoseStamped> path_;
     geometry_msgs::msg::PoseStamped pose_;
 };
 
