@@ -8,7 +8,7 @@ ObstacleDetector::ObstacleDetector()
   //auto hz_ = this->get_parameter("hz").as_int();
   ignore_dist_ = this->declare_parameter<double>("ignore_dist",0.01);
   laser_step_ = this->declare_parameter<int>("laser_step",3); 
-  ignore_angle_range_list_ = this->declare_parameter<std::vector<double>>("ignore_angle_range_list",{(2.0*M_PI/16.0), (6.0*M_PI/16.0), (10.0*M_PI/16.0)});
+  ignore_angle_range_list_ = this->declare_parameter<std::vector<double>>("ignore_angle_range_list",{(2.55* M_PI /16.0), (5.2*M_PI/16.0),(-3.4*M_PI/16.0),(-5.2*M_PI/16.0), (10.5*M_PI/16.0)});
   //printf("ignore_angle_range_list = %f\n",ignore_angle_range_list_[0]);
 
   scan_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>("/scan",rclcpp::QoS(1).reliable(),std::bind(&ObstacleDetector::scan_callback,this,std::placeholders::_1));
@@ -25,7 +25,7 @@ void ObstacleDetector::scan_callback(const sensor_msgs::msg::LaserScan::SharedPt
     // 一定周期で行う処理を書く
     // printf("scan");
     scan_ = *msg;
-    printf("scan_[20] = %f\n", scan_.value().ranges[20]);
+    //printf("scan_[20] = %f\n", scan_.value().ranges[20]);
     flag_laser_scan_ = true;    
 }
 
@@ -111,23 +111,25 @@ void ObstacleDetector::scan_obstacle()
 bool ObstacleDetector::is_ignore_scan(double angle)
 {
     //printf("is_ignore\n");
-    angle = abs(angle);
-    const int size = ignore_angle_range_list_.size();
+    //angle = abs(angle);
+    //const int size = ignore_angle_range_list_.size();
 
-    for(int i=0; i<size/2; i++)
+    if ((ignore_angle_range_list_[0] < angle) and (angle < ignore_angle_range_list_[1]))
     {
-        if((ignore_angle_range_list_[i*2] < angle) and (angle < ignore_angle_range_list_[i*2 + 1])){
-            //printf("ignore1\n");
-            return true;
-        }
-            
-        if(size%2 == 1){
-            if(ignore_angle_range_list_[size-1] < angle){
-                //printf("ignore2\n");
-                return true;
-            }
-        }
-        
+        // printf("ignore1\n");
+        return true;
     }
+    if ((ignore_angle_range_list_[2] > angle) and (angle > ignore_angle_range_list_[3]))
+    {
+        // printf("ignore1\n");
+        return true;
+    }
+
+    if (abs(ignore_angle_range_list_[4]) < abs(angle))
+    {
+        // printf("ignore2\n");
+        return true;
+    }
+        
     return false;
 }

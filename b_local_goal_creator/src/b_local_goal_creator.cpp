@@ -4,7 +4,7 @@ LocalGoalCreator::LocalGoalCreator() : Node("LocalGoalCreator")
 {
     this  -> declare_parameter("hz", 10);
     this  -> declare_parameter("index_step", 5);
-    this  -> declare_parameter("target_distance", 1.7);
+    this  -> declare_parameter("target_distance", 5.0);
     this  -> declare_parameter("goal_index", 50);
 
     this  -> get_parameter("hz", hz_);
@@ -33,16 +33,18 @@ LocalGoalCreator::LocalGoalCreator() : Node("LocalGoalCreator")
 void LocalGoalCreator::poseCallback(const geometry_msgs::msg::PoseStamped::SharedPtr msg)
 {
     pose_ = *msg;
-    printf("poseCallback\n");
+    //printf("poseCallback\n");
+    process();
 }
 
 void LocalGoalCreator::pathCallback(const nav_msgs::msg::Path::SharedPtr msg)
 {
-    path_ = *msg;
+    path_ = msg->poses;
     is_path_ = true;
-    printf("pathCallback\n");
+    //printf("pathCallback\n");
+    
 }
-int LocalGoalCreator::getOdomFreq() { return hz_; }
+//int LocalGoalCreator::getOdomFreq() { return hz_; }
 
 void LocalGoalCreator::process()
 {
@@ -52,30 +54,36 @@ void LocalGoalCreator::process()
     {
         publishGoal();
     }
+    else{
+        //printf("error\n");
+    }
 
 }
 
 void LocalGoalCreator::publishGoal()
 {
     double distance = getDistance();
-    if(distance < taeget_distance_)
+    while(distance < taeget_distance_)
     {
         goal_index_ += index_step_;
-        if(goal_index_ >= path_.poses.size())
+        distance = getDistance();
+        if(goal_index_ >= path_.size())
         {
-            goal_index_ = path_.poses.size() - 1;
+            goal_index_ = path_.size() - 1;
+            break;
         }
     }
+    
+    goal_.point = path_[goal_index_].pose.position;
+    //printf("pub\n");
     goal_.header.stamp = this->get_clock()->now();
-    goal_.point = path_.poses[goal_index_].pose.position;
-    printf("pub\n");
     local_goal_pub_->publish(goal_);
 }
 
 double LocalGoalCreator::getDistance()
 {
-    double dx = path_.poses[goal_index_].pose.position.x - pose_.pose.position.x;
-    double dy = path_.poses[goal_index_].pose.position.y - pose_.pose.position.y;
+    double dx = path_[goal_index_].pose.position.x - pose_.pose.position.x;
+    double dy = path_[goal_index_].pose.position.y - pose_.pose.position.y;
     return hypot(dx, dy);
 }
 

@@ -1,5 +1,5 @@
-#ifndef B_LOCAL_GOAL_CREATOR_H
-#define B_LOCAL_GOAL_CREATOR_H
+#ifndef B_LOCAL_GOAL_CREATOR_HPP
+#define B_LOCAL_GOAL_CREATOR_HPP
 
 #include <rclcpp/rclcpp.hpp>
 #include <nav_msgs/msg/path.hpp>
@@ -11,7 +11,7 @@ class LocalGoalCreator : public rclcpp::Node
 public:
     LocalGoalCreator();
     void process();
-    int getOdomFreq();
+    //int getOdomFreq();
 
 private:
     void pathCallback(const nav_msgs::msg::Path::SharedPtr msg);
@@ -26,8 +26,8 @@ private:
     bool is_path_ = false;
 
     //　
-    rclcpp::Node::SharedPtr nh_;
-    rclcpp::Node::SharedPtr private_nh_;
+    //rclcpp::Node::SharedPtr nh_;
+    //rclcpp::Node::SharedPtr private_nh_;
 
     //　Subscriber
     rclcpp::Subscription<nav_msgs::msg::Path>::SharedPtr path_sub_;
@@ -36,8 +36,9 @@ private:
     // Publisher
     rclcpp::Publisher<geometry_msgs::msg::PointStamped>::SharedPtr local_goal_pub_;
 
+    std::vector<geometry_msgs::msg::PoseStamped> path_;
 
-    nav_msgs::msg::Path path_;
+    //nav_msgs::msg::Path path_;
     geometry_msgs::msg::PointStamped goal_;
     geometry_msgs::msg::PoseStamped pose_;
 };

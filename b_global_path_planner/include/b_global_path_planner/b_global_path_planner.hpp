@@ -1,5 +1,5 @@
-#ifndef GLOBAL_PATH_PLANNER_H
-#define GLOBAL_PATH_PLANNER_H
+#ifndef GLOBAL_PATH_PLANNER_HPP
+#define GLOBAL_PATH_PLANNER_HPP
 
 #include <rclcpp/rclcpp.hpp>
 #include <geometry_msgs/msg/pose_stamped.hpp>
