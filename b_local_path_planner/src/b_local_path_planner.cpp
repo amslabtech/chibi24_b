@@ -5,19 +5,19 @@ DWAPlanner::DWAPlanner() : Node("b_local_path_planner")
     // パラメータ宣言
     this->declare_parameter("hz", 50);
     this->declare_parameter("dt", 0.1);  //変更の余地アリ
-    this->declare_parameter("goal_tolerance", 0.3); //変更の余地あり
-    this->declare_parameter("max_vel", 0.4);
+    this->declare_parameter("goal_tolerance", 0.01); //変更の余地あり
+    this->declare_parameter("max_vel", 0.25);
     this->declare_parameter("min_vel", 0.0);
     this->declare_parameter("max_yawrate", 0.5);
-    this->declare_parameter("min_yawrate", -0.5);
+    this->declare_parameter("min_yawrate", -0.51);
     this->declare_parameter("max_accel", 1000.0);
     this->declare_parameter("max_dyawrate", 1000.0);
     this->declare_parameter("v_reso", 0.05);
     this->declare_parameter("y_reso", 0.02);
     this->declare_parameter("predict_time",3.0); // 変更の余地あり
     this->declare_parameter("heading_cost_gain", 0.7);
-    this->declare_parameter("velocity_cost_gain", 0.6);
-    this->declare_parameter("distance_cost_gain", 0.8);
+    this->declare_parameter("velocity_cost_gain", 0.4);
+    this->declare_parameter("distance_cost_gain", 1.2);
     this->declare_parameter("robot_radius", 0.25); // いらない
     this->declare_parameter("radius_margin", 0.1); // いらない
     this->declare_parameter("search_range", 0.95);  // 変更の余地あり
@@ -80,19 +80,19 @@ DWAPlanner::DWAPlanner() : Node("b_local_path_planner")
 
 void DWAPlanner::local_goal_callback(const geometry_msgs::msg::PointStamped::SharedPtr msg) //local goalを受け取る
 {
-    printf("local_goal_callback\n");
+    //printf("local_goal_callback\n");
     geometry_msgs::msg::TransformStamped transformStamped;
     try
     {
         //lookupTransform("変換のベースとなる座標系","変更したい対象の座標系",変更したい時間(過去データを扱う場合は注意が必要))
         //transformStamped = tfBuffer_->lookupTransform(this->get_parameter("robot_frame").as_string(),"map", tf2::TimePointZero); //座標系の変換  
-        printf("1\n");
+        //printf("1\n");
         transformStamped = tfBuffer_->lookupTransform("base_link","map", tf2::TimePointZero); //座標系の変換 
-        printf("2\n");
+        //printf("2\n");
         // 取得した変換情報を表示
         RCLCPP_INFO(this->get_logger(), "Transform: [%f, %f, %f]", transformStamped.transform.translation.x, transformStamped.transform.translation.y, transformStamped.transform.translation.z);
         flag_local_goal_ = true;
-        printf("transform\n");
+        //printf("transform\n");
     }
     catch (tf2::TransformException &ex) //エラー
     {
@@ -109,7 +109,7 @@ void DWAPlanner::obs_pose_callback(const geometry_msgs::msg::PoseArray::SharedPt
 {
     obs_pose_ = *msg;
     flag_obs_pose_ = true;
-    printf("obs_pose_callback\n");
+    //printf("obs_pose_callback\n");
 }
 
 bool DWAPlanner::is_goal_reached() //情報が適切にsubscribeされているか判定する
@@ -140,14 +140,17 @@ void DWAPlanner::process() //全体の処理(主要なループ)
     {
         const std::vector<double> input = calc_input(); //計算(速度と回転角速度をinputで返す)
         // RCLCPP_WARN_STREAM ::重大度warnのメッセージをログに記録する
-        RCLCPP_WARN_STREAM(rclcpp::get_logger("b_local_path_planner"),"input[0]: " << input[0]);
-        RCLCPP_WARN_STREAM(rclcpp::get_logger("b_local_path_planner"),"input[1]: " << input[1]);
-        roomba_ctl(input[0], input[1]); //roombaに速度,回転角速度指令
+        //RCLCPP_WARN_STREAM(rclcpp::get_logger("b_local_path_planner"),"input[0]: " << input[0]);
+        //RCLCPP_WARN_STREAM(rclcpp::get_logger("b_local_path_planner"),"input[1]: " << input[1]);
+        roomba_ctl(input[0], input[1]); //roombaに速度,回転角速度指令    
+
     }
     else
     {
         roomba_ctl(0.0, 0.0); //止まる
     }
+    flag_local_goal_ = false;
+    flag_obs_pose_ = false;
 }
 
 void DWAPlanner::roomba_ctl(double vel, double yawrate) //roomba制御
@@ -158,7 +161,7 @@ void DWAPlanner::roomba_ctl(double vel, double yawrate) //roomba制御
     roomba_ctl_msg_.cntl.angular.z = yawrate;
 
     cmd_speed_pub_->publish(roomba_ctl_msg_);
-    printf("roomba_ctl\n");
+    //printf("roomba_ctl\n");
 }
 
 std::vector<double> DWAPlanner::calc_input() //計算(速度と回転角速度をinputで返す)
@@ -209,12 +212,12 @@ std::vector<double> DWAPlanner::calc_input() //計算(速度と回転角速度�
     {
         if (i == max_score_index)
         {
-            printf("optimal\n");
+            //printf("optimal\n");
             visualize_trajectory(trajectory_list[i], optimal_path_pub_, now); //最適ルート
         }
         else
         {
-            printf("predict\n");
+            //printf("predict\n");
             visualize_trajectory(trajectory_list[i], predict_path_pub_, now); //想定されるルート
         }
     }
@@ -320,7 +323,7 @@ double DWAPlanner::calc_heading_eval(const std::vector<State> &trajectory) //方
         heading = yaw - goal_yaw;
     }
 
-    return (M_PI - abs(nomalize_angle(heading - M_PI))) / M_PI;
+    return (M_PI - abs(nomalize_angle(heading))) / M_PI;
 }
 
 double DWAPlanner::calc_velocity_eval(const std::vector<State> &trajectory) //速度評価 速度が速い制御入力が高評価
@@ -373,8 +376,8 @@ void DWAPlanner::visualize_trajectory(const std::vector<State> &trajectory, cons
     {
         pose.pose.position.x = state.x;
         pose.pose.position.y = state.y;
-        std::cout << "x: " << state.x << std::endl;
-        std::cout << "y: " << state.y << std::endl;
+        //std::cout << "x: " << state.x << std::endl;
+        //std::cout << "y: " << state.y << std::endl;
         local_path.poses.push_back(pose);
     }
     local_path_pub_->publish(local_path);
