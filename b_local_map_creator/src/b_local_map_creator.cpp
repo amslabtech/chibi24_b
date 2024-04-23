@@ -59,7 +59,7 @@ void LocalMapCreator::process()
 */
     if(is_get_obs_poses_)
     {
-        printf("map\n");
+        //printf("map\n");
         //init_local_map();]
         //printf("local_map_info?_height = %d\n",local_map_.info.height);
         update_local_map();
@@ -84,8 +84,8 @@ void LocalMapCreator::update_local_map()
     {
         const double x = obs_pose.position.x;
         const double y = obs_pose.position.y;
-        printf("x = %f\n",x);
-        printf("y = %f\n",y);
+        // printf("x = %f\n",x);
+        // printf("y = %f\n",y);
         const double dist = hypot(x, y);
         const double angle = atan2(y, x);
 
