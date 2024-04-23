@@ -8,7 +8,7 @@ ObstacleDetector::ObstacleDetector()
   //auto hz_ = this->get_parameter("hz").as_int();
   ignore_dist_ = this->declare_parameter<double>("ignore_dist",0.01);
   laser_step_ = this->declare_parameter<int>("laser_step",3); 
-  ignore_angle_range_list_ = this->declare_parameter<std::vector<double>>("ignore_angle_range_list",{(2.55* M_PI /16.0), (5.2*M_PI/16.0),(-3.2*M_PI/16.0),(-5.2*M_PI/16.0), (10.5*M_PI/16.0)});
+  ignore_angle_range_list_ = this->declare_parameter<std::vector<double>>("ignore_angle_range_list",{(2.55* M_PI /16.0), (5.2*M_PI/16.0),(-3.2*M_PI/16.0),(-5.2*M_PI/16.0), (10.0*M_PI/16.0)});
   //printf("ignore_angle_range_list = %f\n",ignore_angle_range_list_[0]);
 
   scan_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>("/scan",rclcpp::QoS(1).reliable(),std::bind(&ObstacleDetector::scan_callback,this,std::placeholders::_1));

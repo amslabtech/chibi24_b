@@ -12,8 +12,8 @@ EMCL::EMCL():Node("b_localizer")
     this -> declare_parameter("flag_broadcast", true); //議論の余地あり
     this -> declare_parameter("is_visible", true);
     this -> declare_parameter("hz", 10);
-    this -> declare_parameter("particle_num", 500);
-    this -> declare_parameter("move_dist_th", 0.2);
+    this -> declare_parameter("particle_num", 420);
+    this -> declare_parameter("move_dist_th", 0.025);
     this -> declare_parameter("init_x", 0.0);
     this -> declare_parameter("init_y", 0.0);
     this -> declare_parameter("init_yaw", 0.0);
